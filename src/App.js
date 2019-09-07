@@ -2,9 +2,6 @@ import React from 'react';
 import './App.css';
 
 function App() {
-<<<<<<< HEAD
-
-=======
   return (
     <div className="App">
       <header className="App-header">
@@ -14,7 +11,6 @@ function App() {
   );
   return 
     
->>>>>>> bb1949c2dc444e65e600c8e6f78e2ceaedf458ff
    
        
   
