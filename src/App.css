@@ -1,32 +1,3 @@
 .App {
-  text-align: center;
+  text-align: end;
 }
-
-<<<<<<< HEAD
-
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-=======
->>>>>>> 1ef03f31fc75f95dc971139b2ef992f2748010a6
