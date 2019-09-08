@@ -1,19 +1,31 @@
-import React,{useState} from 'react';
+import React, { Component } from 'react';
+//import logo from './logo.svg';
 import './App.css';
-import Component1 from "./_components/Component1";
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       <h1>hallo</h1>
-      </header>
-    </div>
-  );
-  return 
+class App extends Component {
+   constructor(){
+       super();
+       this.state ={users: []};
+   }
+   componentDidMount() {
+          fetch('/users')
+            .then(res => {
+                console.log(res);
+                return res.json()
+             })
+            .then(users => { 
+                console.log(users); 
+                this.setState({ users })
+             });
+         }
+   render() {
+        return (
+            <div className="App">
+                <h1>Users</h1>
+                {this.state.users.map(user =>
+                <div key={user.id}>user: {user.name} Password: {user.password}</div>
+              )}
+            </div>
+        );
+    }
 }
-
-
-
-
 export default App;
