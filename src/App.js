@@ -3,7 +3,9 @@ import './App.css';
 import Component1 from "./_components/Component1";
 
 function App() {
-  return <Component1/>;
+  return<>
+  <h1>helllooo</h1>
+  <Component1/></>;
 }
 
 
