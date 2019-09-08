@@ -1,10 +1,11 @@
 var express = require('express');
 var router = express.Router();
-const User = require('../model/user')
+const User = require('../model/user');
+
 /* GET users listing. */
 router.get('/', function (req, res, next) {
   // res.send('respond with a resource');
-  res.json([{
+   /* res.json([{
     id: 1,
     name: "Hiccup",
     password: 'hiccup'
@@ -12,7 +13,15 @@ router.get('/', function (req, res, next) {
     id: 2,
     name: "King Arthur",
     password: 'king-arthur'
-  }]);
+  }]); */ 
+
+  User.find({}).then(userfind=>{
+    res.send(userfind);
+    res.json(userfind);
+  }).catch(err=>{
+    res.send('user does not show because ...' + err);
+  })
+  
 });
 
 router.post('/login', (req, res) => {
