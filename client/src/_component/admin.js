@@ -3,6 +3,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import NativeSelects from './adduser'
 
 const AntTabs = withStyles({
   root: {
@@ -112,6 +113,9 @@ export default function CustomizedTabs() {
           <StyledTab label="Connections" />
         </StyledTabs>
         <Typography className={classes.padding} />
+      </div>
+      <div>
+        <NativeSelects/>
       </div>
     </div>
   );
