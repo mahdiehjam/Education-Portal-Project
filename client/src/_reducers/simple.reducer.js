@@ -1,13 +1,13 @@
 import {simpleConstants} from '../_constants';
 
-const initState = {number: 0}
+const initState = {number}
 
 export const simpleReducer = (state=initState, action) => {
     switch(action.type) {
         case simpleConstants.INCREMENT:
-            return {...state, number: state.number + 1}
+            return {...state}
         case simpleConstants.DECREMENT:
-            return {...state, number: state.number - 1}
+            return {...state}
         default:
             return state;
     }
