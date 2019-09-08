@@ -107,8 +107,8 @@ export default function CustomizedTabs() {
       </div>
       <div className={classes.demo2}>
         <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
-          <StyledTab label="Workflows" />
-          <StyledTab label="Datasets" />
+          <StyledTab label="Users" />
+          <StyledTab label="Courses" />
           <StyledTab label="Connections" />
         </StyledTabs>
         <Typography className={classes.padding} />
