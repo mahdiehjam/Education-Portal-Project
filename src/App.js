@@ -1,5 +1,6 @@
-import React from 'react';
+import React,{useState} from 'react';
 import './App.css';
+import Component1 from "./_components/Component1";
 
 function App() {
   return (
@@ -11,5 +12,8 @@ function App() {
   );
   return 
 }
+
+
+
 
 export default App;
