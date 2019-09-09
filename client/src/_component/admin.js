@@ -3,6 +3,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Table from "./adduser.index";
 
 const Admin = withStyles({
@@ -88,6 +89,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
+
 export default function CustomizedTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
@@ -107,6 +109,7 @@ export default function CustomizedTabs() {
       {value: '2', label: 'Suspend'},
     ],required: true}
   ]
+  
   return (
     <div className={classes.root}>
       <div className={classes.demo1}>
@@ -118,15 +121,18 @@ export default function CustomizedTabs() {
         {/* <Typography className={classes.padding} /> */}
       </div>
       <div className={classes.demo2}>
+        <Router>
         <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
-          <StyledTab label="Users" />
-          <StyledTab label="Courses" />
+          <StyledTab  component={props => <Link to={'/'} {...props} />} label="Login"/>
+          <StyledTab label="Users"  component={props => <Link to={'/admin'} {...props} />}/>
+          <StyledTab label="Courses" button component={props => <Link to={'/admin/course'} {...props} />} />
           <StyledTab label="Connections" />
         </StyledTabs>
+        </Router>
         <Typography className={classes.padding} />
       </div>
       <div>
-      <Table columns={columns}/>
+      <Table  columns={columns}/>
       </div>
     </div>
   );
