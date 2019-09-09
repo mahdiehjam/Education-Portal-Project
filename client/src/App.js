@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Adimn from './_component/admin';
+ import Login from './_component/Login';
 
 class App extends Component {
    constructor(){
@@ -28,6 +29,7 @@ class App extends Component {
                 <div key={user.id}>user: {user.email} Password: {user.password}</div>
               )}
             </div>
+            <Route path="/" exact component={Login}/>
             <Route path="/admin" exact component={Adimn} />
            </Router>
         );
