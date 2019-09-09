@@ -4,8 +4,8 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Table from "./adduser.index";
-import NewCourse from "./newCourse";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import NewCourse from "./newCourse";
 
 const Admin = withStyles({
   root: {
@@ -129,7 +129,8 @@ export default function CustomizedTabs() {
       </div>
       <div>
       <Table columns={columns}/>
-      <NewCourse columns={columns}/>
+      <NewCourse/>
+      
       
       </div>
     </div>

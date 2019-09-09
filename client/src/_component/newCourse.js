@@ -4,15 +4,12 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
+import CheckboxLabels from "./checkbox";
 
 function NewCourse() {
   return (
@@ -71,10 +68,10 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            id="first name"
-            label="first name"
-            name="first name"
-            autoComplete="first name"
+            id="course number"
+            label="course number"
+            name="course number"
+            autoComplete="course number"
             autoFocus
           />
           <TextField
@@ -82,57 +79,36 @@ export default function SignIn() {
             margin="normal"
             required
             fullWidth
-            name="last name"
-            label="last name"
-            type="last name"
-            id="last name"
-            autoComplete="current-last name"
+            name="course name"
+            label="course name"
+            type="course name"
+            id="course name"
+            autoComplete="current-course name"
           />
            <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="ID number"
-            label="ID number"
-            type="ID number"
-            id="ID number"
-            autoComplete="current-ID number"
+            name="teacher name"
+            label="teacher name"
+            type="teacher name"
+            id="teacher name"
+            autoComplete="current-teacher name"
           />
            <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="E-mail"
-            label="E-mail"
-            type="E-mail"
-            id="E-mail"
-            autoComplete="current-E-mail"
+            name="teacher assistance name"
+            label="teacher assistance name"
+            type="teacher assistance name"
+            id="teacher assistance name"
+            autoComplete="current-teacher assistance name"
           />
-           <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="phone number"
-            label="phone number"
-            type="phone number"
-            id="phone number"
-            autoComplete="current-phone number"
-          />
-           <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="address"
-            label="address"
-            type="address"
-            id="address"
-            autoComplete="current-address"
-          />
-         
+          <div><h3>Course days:</h3></div>
+           <CheckboxLabels/>
           <Button
             type="submit"
             fullWidth
@@ -140,7 +116,7 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            NewCourse
+            Register
           </Button>
   
         </form>
