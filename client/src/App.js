@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import TabPanel from './_component/admin';
+import Admin from './_component/admin';
 import Login from './_component/Login';
 import newCourse from './_component/newCourse';
 
@@ -31,7 +31,7 @@ class App extends Component {
               )}
             </div>
             <Route path="/" exact component={Login}/>
-            <Route path="/admin" component={TabPanel} />
+            <Route path="/admin" component={Admin} />
             <Route path='/course' component={newCourse}/>
            </Router>
         );

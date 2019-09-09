@@ -9,15 +9,15 @@ import Box from '@material-ui/core/Box';
 import Table from "./adduser.index";
 import NewCourse from "./newCourse";
 
-function TabPanel(props) {
+function Admin(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <Typography
       component="div"
-      role="tabpanel"
+      role="Admin"
       hidden={value !== index}
-      id={`scrollable-auto-tabpanel-${index}`}
+      id={`scrollable-auto-Admin-${index}`}
       aria-labelledby={`scrollable-auto-tab-${index}`}
       {...other}
     >
@@ -26,7 +26,7 @@ function TabPanel(props) {
   );
 }
 
-TabPanel.propTypes = {
+Admin.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
@@ -35,7 +35,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-tabpanel-${index}`,
+    'aria-controls': `scrollable-auto-Admin-${index}`,
   };
 }
 
@@ -87,27 +87,27 @@ export default function ScrollableTabsButtonAuto() {
           <Tab label="Item Seven" {...a11yProps(6)} />
         </Tabs>
       </AppBar>
-      <TabPanel value={value} index={0}>
+      <Admin value={value} index={0}>
       <Table columns={columns}/>
-      </TabPanel>
-      <TabPanel value={value} index={1}>
+      </Admin>
+      <Admin value={value} index={1}>
       <NewCourse/>
-      </TabPanel>
-      <TabPanel value={value} index={2}>
+      </Admin>
+      <Admin value={value} index={2}>
         Item Three
-      </TabPanel>
-      <TabPanel value={value} index={3} >
+      </Admin>
+      <Admin value={value} index={3} >
         Item Four
-      </TabPanel>
-      <TabPanel value={value} index={4}>
+      </Admin>
+      <Admin value={value} index={4}>
         Item Five
-      </TabPanel>
-      <TabPanel value={value} index={5}>
+      </Admin>
+      <Admin value={value} index={5}>
         Item Six
-      </TabPanel>
-      <TabPanel value={value} index={6}>
+      </Admin>
+      <Admin value={value} index={6}>
         Item Seven
-      </TabPanel>
+      </Admin>
     </div>
   );
 }
