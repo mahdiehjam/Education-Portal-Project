@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import AntTab from './_component/admin';
- import Login from './_component/Login';
+import Login from './_component/Login';
+import NewCourse from './_component/newCourse';
 
 class App extends Component {
    constructor(){
@@ -32,6 +33,7 @@ class App extends Component {
             </div>
             <Route path="/" exact component={Login}/>
             <Route path="/admin" exact component={AntTab} />
+            <Route path="/newcourse" exact component={NewCourse}/>
            </Router>
         );
     }
