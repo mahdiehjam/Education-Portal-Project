@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Adimn from './_component/admin';
+import TabPanel from './_component/admin';
 import Login from './_component/Login';
-import Table from './_component/adduser.index';
+import newCourse from './_component/newCourse';
 
 class App extends Component {
    constructor(){
@@ -30,9 +30,9 @@ class App extends Component {
                 <div key={user.id}>user: {user.email} Password: {user.password}</div>
               )}
             </div>
-            
             <Route path="/" exact component={Login}/>
-            <Route path="/admin" component={Adimn} />
+            <Route path="/admin" component={TabPanel} />
+            <Route path='/course' component={newCourse}/>
            </Router>
         );
     }
