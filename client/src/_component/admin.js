@@ -3,9 +3,11 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import NativeSelects from './adduser'
+import Table from "./adduser.index";
+import NewCourse from "./newCourse";
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-const AntTabs = withStyles({
+const Admin = withStyles({
   root: {
     borderBottom: '1px  solid #e8e8e8',
   },
@@ -95,16 +97,27 @@ export default function CustomizedTabs() {
   function handleChange(event, newValue) {
     setValue(newValue);
   }
-
+  const columns = [
+    {name: 'username', label: 'UserName', type: 'text',required: true},
+    {name: 'firstName', label: 'First Name', type: 'text',required: true},
+    {name: 'lastName', label: 'Last Name', type: 'text'},
+    {name: 'sex', label: 'Sex', type: 'bool', true: 'Male', false: 'Female', initValue: false},
+    {name: 'age', label: 'Age', type: 'number'},
+    {name: 'status', label: 'Status', type: 'list', options: [
+      {value: '0', label: 'Active'},
+      {value: '1', label: 'Deactive'},
+      {value: '2', label: 'Suspend'},
+    ],required: true}
+  ]
   return (
     <div className={classes.root}>
       <div className={classes.demo1}>
-        <AntTabs value={value} onChange={handleChange} aria-label="ant example">
+        {/* <Admin value={value} onChange={handleChange} aria-label="ant example">
           <AntTab label="Tab 1" />
           <AntTab label="Tab 2" />
           <AntTab label="Tab 3" />
-        </AntTabs>
-        <Typography className={classes.padding} />
+        </Admin> */}
+        {/* <Typography className={classes.padding} /> */}
       </div>
       <div className={classes.demo2}>
         <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
@@ -115,7 +128,9 @@ export default function CustomizedTabs() {
         <Typography className={classes.padding} />
       </div>
       <div>
-        <NativeSelects/>
+      <Table columns={columns}/>
+      <NewCourse columns={columns}/>
+      
       </div>
     </div>
   );

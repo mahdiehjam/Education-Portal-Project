@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 //import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import AntTab from './_component/admin';
+import Adimn from './_component/admin';
 import Login from './_component/Login';
-import NewCourse from './_component/newCourse';
 
 class App extends Component {
    constructor(){
@@ -24,16 +23,14 @@ class App extends Component {
          }
    render() {
         return (
-            <Router>
+            <Router className="App">
             <div className="App">
-                <h1>Admin</h1>
                 {this.state.users.map(user =>
                 <div key={user.id}>user: {user.email} Password: {user.password}</div>
               )}
             </div>
             <Route path="/" exact component={Login}/>
-            <Route path="/admin" exact component={AntTab} />
-            <Route path="/newcourse" exact component={NewCourse}/>
+            <Route path="/admin" exact component={Adimn} />
            </Router>
         );
     }
