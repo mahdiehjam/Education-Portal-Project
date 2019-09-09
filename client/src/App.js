@@ -23,7 +23,7 @@ class App extends Component {
          }
    render() {
         return (
-            <Router>
+            <Router className="App">
             <div className="App">
                 {this.state.users.map(user =>
                 <div key={user.id}>user: {user.email} Password: {user.password}</div>

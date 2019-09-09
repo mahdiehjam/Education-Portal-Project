@@ -110,12 +110,12 @@ export default function CustomizedTabs() {
   return (
     <div className={classes.root}>
       <div className={classes.demo1}>
-        <Admin value={value} onChange={handleChange} aria-label="ant example">
+        {/* <Admin value={value} onChange={handleChange} aria-label="ant example">
           <AntTab label="Tab 1" />
           <AntTab label="Tab 2" />
           <AntTab label="Tab 3" />
-        </Admin>
-        <Typography className={classes.padding} />
+        </Admin> */}
+        {/* <Typography className={classes.padding} /> */}
       </div>
       <div className={classes.demo2}>
         <StyledTabs value={value} onChange={handleChange} aria-label="styled tabs example">
