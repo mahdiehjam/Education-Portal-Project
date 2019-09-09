@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Adimn from './_component/admin';
- import Login from './_component/Login';
+import Login from './_component/Login';
 
 class App extends Component {
    constructor(){
