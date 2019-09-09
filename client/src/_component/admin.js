@@ -3,8 +3,9 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Link } from "react-router-dom";
 import Table from "./adduser.index";
+import NewCourse from "./newCourse";
 
 const Admin = withStyles({
   root: {
@@ -132,7 +133,8 @@ export default function CustomizedTabs() {
         <Typography className={classes.padding} />
       </div>
       <div>
-      <Table  columns={columns}/>
+      <Table columns={columns}/>
+      <NewCourse/>
       </div>
     </div>
   );
