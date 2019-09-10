@@ -1,3 +1,5 @@
-export const simpleConstants = {
+const simpleConstants = {
     
 }
+
+export default simpleConstants;

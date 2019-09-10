@@ -3,15 +3,19 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const passport = require('passport');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var users = require('./routes/user');
+
 
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 var app = express();
-
-// bd connect
+app.use(passport.initialize());
+require('./passport')(passport); 
+// db connect
 
 mongoose.connect('mongodb://localhost:27017/courseManager',{useMongoClient: true}).then(db=>{
   console.log('mongo connected')
@@ -31,7 +35,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+//app.use('/users', usersRouter);
+app.use('/api/users', users);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

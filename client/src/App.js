@@ -1,40 +1,52 @@
 import React, { Component } from 'react';
-//import logo from './logo.svg';
-import './App.css';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Admin from './_component/admin';
-import Login from './_component/Login';
-import newCourse from './_component/newCourse';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import jwt_decode from 'jwt-decode';
+import setAuthToken from './setAuthToken';
+import { setCurrentUser, logoutUser } from './_actions/authentication';
+import store from './store';
 
-class App extends Component {
-   constructor(){
-       super();
-       this.state ={users: []};
-   }
-   componentDidMount() {
-          fetch('/users')
-            .then(res => {
-                console.log(res);
-                return res.json()
-             })
-            .then(users => { 
-                console.log(users); 
-                this.setState({ users })
-             });
-         }
-   render() {
-        return (
-            <Router className="App">
-            <div className="App">
-                {this.state.users.map(user =>
-                <div key={user.id}>user: {user.email} Password: {user.password}</div>
-              )}
-            </div>
-            <Route path="/" exact component={Login}/>
-            <Route path="/admin" component={Admin} />
-            <Route path='/course' component={newCourse}/>
-           </Router>
-        );
+import Register from './_component/register';
+import Login from './_component/Login';
+import Home from './_component/home';
+import newCourse from './_component/newCourse';
+import Admin from './_component/admin';
+import Navbar from './_component/navbar';
+
+//import 'bootstrap/dist/css/bootstrap.min.css';
+if(localStorage.jwtToken) {
+    setAuthToken(localStorage.jwtToken);
+    const decoded = jwt_decode(localStorage.jwtToken);
+    store.dispatch(setCurrentUser(decoded));
+  
+    const currentTime = Date.now() / 1000;
+    if(decoded.exp < currentTime) {
+      store.dispatch(logoutUser());
+      window.location.href = '/login'
     }
+  }
+class App extends Component {
+  render() {
+    return (
+      <Provider store = { store }>
+        <Router>
+            <div>
+                <Navbar/>
+                <Route exact path="/" component={ Home } />
+                <div className="container">
+                  <Route exact path="/register" component={ Register } />
+                  <Route exact path="/login" component={ Login } />
+                  <Route path="/admin" component={Admin} />
+                  <Route path='/course' component={newCourse}/>
+                </div>
+            </div>
+          </Router>
+        </Provider>
+    );
+  }
 }
+
 export default App;
+
+
+

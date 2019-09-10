@@ -1,1 +1,1 @@
-export * from './simple.constant';
+export * from './simple.constans';
