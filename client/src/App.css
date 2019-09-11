@@ -24,7 +24,7 @@ body {
   background-color: white;
   margin: auto;
 }
-
+/* 
 h2{
   margin-bottom: 40px;
 }
@@ -73,7 +73,7 @@ input{
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 table {
   width: 100%;
