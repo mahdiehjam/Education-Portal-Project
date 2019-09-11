@@ -8,7 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Table from "./adduser.index";
 import NewCourse from "./newCourse";
-
+import Navbar from './navbar';
 function Admin(props) {
   const { children, value, index, ...other } = props;
 
@@ -68,6 +68,7 @@ export default function ScrollableTabsButtonAuto() {
   ]
   return (
     <div className={classes.root}>
+      
       <AppBar position="static" color="default">
         <Tabs
           value={value}
