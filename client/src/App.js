@@ -5,7 +5,8 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
 import { setCurrentUser, logoutUser } from './_actions/authentication';
 import store from './store';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 import Register from './_component/register';
 import Login from './_component/Login';
 import Home from './_component/home';

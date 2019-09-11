@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Table from "./adduser.index";
 import NewCourse from "./newCourse";
+// import Charts from "./charts";
 
 function Admin(props) {
   const { children, value, index, ...other } = props;
@@ -94,7 +95,7 @@ export default function ScrollableTabsButtonAuto() {
       <NewCourse/>
       </Admin>
       <Admin value={value} index={2}>
-        Item Three
+      {/* <Charts/> */}Item three
       </Admin>
       <Admin value={value} index={3} >
         Item Four
