@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import Table from "./adduser.index";
 import NewCourse from "./newCourse";
+import Register from './register';
 import Navbar from './navbar';
 function Admin(props) {
   const { children, value, index, ...other } = props;
@@ -89,6 +90,7 @@ export default function ScrollableTabsButtonAuto() {
         </Tabs>
       </AppBar>
       <Admin value={value} index={0}>
+        <Register/>
       <Table columns={columns}/>
       </Admin>
       <Admin value={value} index={1}>
