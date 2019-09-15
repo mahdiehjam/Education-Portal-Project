@@ -6,9 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import Table from "./adduser.index";
+import Register from "./register";
 import NewCourse from "./newCourse";
-
+import Navbar from './navbar';
 function Admin(props) {
   const { children, value, index, ...other } = props;
 
@@ -54,20 +54,10 @@ export default function ScrollableTabsButtonAuto() {
   function handleChange(event, newValue) {
     setValue(newValue);
   }
-  const columns = [
-    {name: 'username', label: 'UserName', type: 'text',required: true},
-    {name: 'firstName', label: 'First Name', type: 'text',required: true},
-    {name: 'lastName', label: 'Last Name', type: 'text'},
-    {name: 'sex', label: 'Sex', type: 'bool', true: 'Male', false: 'Female', initValue: false},
-    {name: 'age', label: 'Age', type: 'number'},
-    {name: 'status', label: 'Status', type: 'list', options: [
-      {value: '0', label: 'Active'},
-      {value: '1', label: 'Deactive'},
-      {value: '2', label: 'Suspend'},
-    ],required: true}
-  ]
+ 
   return (
     <div className={classes.root}>
+      
       <AppBar position="static" color="default">
         <Tabs
           value={value}
@@ -88,7 +78,7 @@ export default function ScrollableTabsButtonAuto() {
         </Tabs>
       </AppBar>
       <Admin value={value} index={0}>
-      <Table columns={columns}/>
+      <Register />
       </Admin>
       <Admin value={value} index={1}>
       <NewCourse/>
