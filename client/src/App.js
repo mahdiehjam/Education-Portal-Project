@@ -13,9 +13,9 @@ import Home from './_component/home';
 import newCourse from './_component/newCourse';
 import Admin from './_component/admin';
 import Navbar from './_component/navbar';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-//import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 if(localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwt_decode(localStorage.jwtToken);
