@@ -64,7 +64,7 @@ export default function SignIn() {
           NewCourse
         </Typography>
         <form className={classes.form} noValidate>
-          <TextField
+          {/* <TextField
             variant="outlined"
             margin="normal"
             required
@@ -74,7 +74,7 @@ export default function SignIn() {
             name="course number"
             autoComplete="course number"
             autoFocus
-          />
+          /> */}
           <TextField
             variant="outlined"
             margin="normal"
@@ -97,7 +97,7 @@ export default function SignIn() {
             id="teacher name"
             autoComplete="current-teacher name"
           />
-           <TextField
+           {/* <TextField
             variant="outlined"
             margin="normal"
             required
@@ -107,7 +107,7 @@ export default function SignIn() {
             type="teacher assistance name"
             id="teacher assistance name"
             autoComplete="current-teacher assistance name"
-          />
+          /> */}
           <div><h3>Course days:</h3></div>
            <CheckboxLabels/>
           <Button

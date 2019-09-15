@@ -10,8 +10,8 @@ import './App.css';
 import Register from './_component/register';
 import Login from './_component/Login';
 import Home from './_component/home';
-import newCourse from './_component/newCourse';
-import Admin from './_component/admin';
+import newCourse from './_component/admin/newCourse';
+import Admin from './_component/admin/index';
 import Navbar from './_component/navbar';
 
 

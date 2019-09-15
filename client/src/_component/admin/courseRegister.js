@@ -5,16 +5,14 @@ import { withRouter } from 'react-router-dom';
 import { registerUser } from '../_actions/authentication';
 import classnames from 'classnames';
 
-class Register extends Component {
+class courseRegister extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            name: '',
-            email: '',
-            password: '',
-            password_confirm: '',
-            role:'',
+            name:'',
+            status:'',
+            teacher:'',
             errors: {}
         }
         this.handleInputChange = this.handleInputChange.bind(this);
@@ -29,14 +27,12 @@ class Register extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const user = {
+        const course = {
             name: this.state.name,
-            email: this.state.email,
-            password: this.state.password,
-            password_confirm: this.state.password_confirm,
-            role: this.state.role
+            status:this.state.status,
+            teacher:this.state.teacher
         }
-        this.props.registerUser(user, this.props.history);
+        this.props.registercourse(course, this.props.history);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -75,8 +71,9 @@ class Register extends Component {
                     />
                     {errors.name && (<div className="invalid-feedback">{errors.name}</div>)}
                 </div>
+
                 <div className="form-group">
-                    <input
+{/*                     <input
                     type="email"
                     placeholder="Email"
                     className={classnames('form-control form-control-lg', {
@@ -85,37 +82,16 @@ class Register extends Component {
                     name="email"
                     onChange={ this.handleInputChange }
                     value={ this.state.email }
-                    />
+                    /> */}
+                    <select name="status" id="status" class="form-control">
+                        <option value="I">Inprogress</option>
+                        <option value="D">Done</option>
+                    </select>
                     {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
                 </div>
+                
                 <div className="form-group">
-                    <input
-                    type="password"
-                    placeholder="Password"
-                    className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.password
-                    })}
-                    name="password"
-                    onChange={ this.handleInputChange }
-                    value={ this.state.password }
-                    />
-                    {errors.password && (<div className="invalid-feedback">{errors.password}</div>)}
-                </div>
-                <div className="form-group">
-                    <input
-                    type="password"
-                    placeholder="Confirm Password"
-                    className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.password_confirm
-                    })}
-                    name="password_confirm"
-                    onChange={ this.handleInputChange }
-                    value={ this.state.password_confirm }
-                    />
-                    {errors.password_confirm && (<div className="invalid-feedback">{errors.password_confirm}</div>)}
-                </div>
-                <div className="form-group">
-                    <input
+                   {/*  <input
                     type="text"
                     placeholder="Role"
                     className={classnames('form-control form-control-lg', {
@@ -124,12 +100,19 @@ class Register extends Component {
                     name="role"
                     onChange={ this.handleInputChange }
                     value={ this.state.role }
-                    />
+                    /> */}
+                    <select name="teacher" id="teacher" class="form-control">
+                        
+                        {teachers.map(teacher=>{
+                            <option value={teacher.id}>{teacher.name}</option>
+                        })}
+                        
+                    </select>
                     {errors.role && (<div className="invalid-feedback">{errors.role}</div>)}
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary">
-                        Register User
+                        Register Course
                     </button>
                 </div>
             </form>
@@ -146,4 +129,4 @@ const mapStateToProps = state => ({
     errors: state.errors
 });
 
-export default connect(mapStateToProps,{ registerUser })(withRouter(Register))
+export default connect(mapStateToProps,{ registerUser })(withRouter(courseRegister))

@@ -1,4 +1,4 @@
-
+import react from 'react';
 import axios from 'axios';
 import { GET_ERRORS, SET_CURRENT_USER } from './type';
 import setAuthToken from '../setAuthToken';
@@ -6,7 +6,7 @@ import jwt_decode from 'jwt-decode';
 
 export const registerUser = (user, history) => dispatch => {
     axios.post('/api/users/register', user)
-            .then(res => history.push('/login'))
+            .then(res =>  history.push('/login') )
             .catch(err => {
                 dispatch({
                     type: GET_ERRORS,
@@ -14,6 +14,7 @@ export const registerUser = (user, history) => dispatch => {
                 });
             });
 }
+
 
 export const loginUser = (user,history) => dispatch => {
     axios.post('/api/users/login', user)
@@ -45,4 +46,15 @@ export const logoutUser = (history) => dispatch => {
     setAuthToken(false);
     dispatch(setCurrentUser({}));
     history.push('/login');
+}
+
+export const registerCourse = (course, history) => dispatch => {
+    axios.post('/course/create', course)
+            .then(res =>  history.push('/course') )
+            .catch(err => {
+                dispatch({
+                    type: GET_ERRORS,
+                    payload: err.response.data
+                });
+            });
 }
