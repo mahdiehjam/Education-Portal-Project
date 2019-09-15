@@ -1,18 +1,18 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+const createError = require('http-errors');
+const express = require('express');
+const path = require('path');
+const cookieParser = require('cookie-parser');
+const logger = require('morgan');
 const passport = require('passport');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
-var users = require('./routes/user');
-
+const indexRouter = require('./routes/index');
+const usersRouter = require('./routes/users');
+const users = require('./routes/user');
+const courses = require('./routes/course');
 
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
-var app = express();
+const app = express();
 app.use(passport.initialize());
 require('./passport')(passport); 
 // db connect
@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/api/users', users);
-
+app.use('/courses', courses);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
