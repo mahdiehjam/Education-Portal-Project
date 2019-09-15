@@ -21,13 +21,14 @@ const userSchema = new Schema({
   avatar:{
     type: String
   },
-  date:{
-    type: Date,
-    default: Date.now
-  },
+  
   role:{
-    type:String,
-    required:true,
+    type: String,
+    required: true
+  },
+  course:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Course',
   }
 });
 

@@ -34,6 +34,7 @@ router.post('/register', function(req, res) {
                 name: req.body.name,
                 email: req.body.email,
                 password: req.body.password,
+                role:req.body.role,
                 avatar
             });
             
@@ -67,7 +68,7 @@ router.post('/login', (req, res) => {
 
     const email = req.body.email;
     const password = req.body.password;
-
+    
     User.findOne({email})
         .then(user => {
             if(!user) {
