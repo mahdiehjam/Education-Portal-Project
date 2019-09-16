@@ -82,7 +82,7 @@ export default function ScrollableTabsButtonAuto() {
       <Register />
       </Admin>
       <Admin value={value} index={1}>
-      <NewCourse/>
+      <RegisterCourse/>
       </Admin>
       <Admin value={value} index={2}>
       {/* <Charts/> */}Item three

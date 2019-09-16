@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/api/users', users);
-app.use('/courses', courses);
+app.use('api/users/courses', courses);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

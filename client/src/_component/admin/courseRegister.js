@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { registerUser } from '../_actions/authentication';
+import { GetTeacher , registerCourse } from '../../_actions/index';
 import classnames from 'classnames';
+import { timingSafeEqual } from 'crypto';
 
-class courseRegister extends Component {
+class RegisterCourse extends Component {
 
     constructor(props) {
         super(props);
@@ -15,10 +16,11 @@ class courseRegister extends Component {
             teacher:'',
             errors: {}
         }
+        GetTeacher();
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
-
+    
     handleInputChange(e) {
         this.setState({
             [e.target.name]: e.target.value
@@ -32,7 +34,7 @@ class courseRegister extends Component {
             status:this.state.status,
             teacher:this.state.teacher
         }
-        this.props.registercourse(course, this.props.history);
+        this.props.registerCourse(course, this.props.history);
     }
 
     componentWillReceiveProps(nextProps) {
@@ -43,17 +45,15 @@ class courseRegister extends Component {
         }
     }
 
-   /*  componentDidMount() {
-        if(this.props.auth.isAuthenticated) {
-            this.props.history.push('/');
-        }else{
-            console.log('not authenticated')
-        }
-    }  */
+     componentDidMount() {
+        
+    }  
 
 
     render() {
         const { errors } = this.state;
+        const {users} = this.props.users;
+        console.log(users);
         return(
         <div className="container" style={{ marginTop: '50px', width: '700px'}}>
             <h2 style={{marginBottom: '40px'}}>Registration</h2>
@@ -83,13 +83,13 @@ class courseRegister extends Component {
                     onChange={ this.handleInputChange }
                     value={ this.state.email }
                     /> */}
-                    <select name="status" id="status" class="form-control">
+                    <select name="status" id="status" className="form-control">
                         <option value="I">Inprogress</option>
                         <option value="D">Done</option>
                     </select>
                     {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
                 </div>
-                
+                <p><img src={users.avatar}/>teachers:{users.email}</p>
                 <div className="form-group">
                    {/*  <input
                     type="text"
@@ -101,11 +101,12 @@ class courseRegister extends Component {
                     onChange={ this.handleInputChange }
                     value={ this.state.role }
                     /> */}
-                    <select name="teacher" id="teacher" class="form-control">
+                    
+                    <select name="teacher" id="teacher" className="form-control">
                         
-                        {teachers.map(teacher=>{
-                            <option value={teacher.id}>{teacher.name}</option>
-                        })}
+                         {/*  /* {users.map(users=>{
+                            return <option value={users.id}>{users.name}</option>
+                        })} */ }
                         
                     </select>
                     {errors.role && (<div className="invalid-feedback">{errors.role}</div>)}
@@ -121,12 +122,14 @@ class courseRegister extends Component {
     }
 }
 
-Register.propTypes = {
-    registerUser: PropTypes.func.isRequired,
+RegisterCourse.propTypes = {
+    registerCourse: PropTypes.func.isRequired,
+    users: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    errors: state.errors
+    errors: state.errors,
+    users: state.users
 });
 
-export default connect(mapStateToProps,{ registerUser })(withRouter(courseRegister))
+export default connect(mapStateToProps,{ registerCourse })(withRouter(RegisterCourse))
