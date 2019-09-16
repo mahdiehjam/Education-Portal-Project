@@ -6,7 +6,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import NewCourse from "./newCourse";
+import RegisterCourse from "./courseRegister";
 import Register from '../register';
 import Navbar from '../navbar';
 function Admin(props) {
@@ -81,7 +81,7 @@ export default function ScrollableTabsButtonAuto() {
       <Register />
       </Admin>
       <Admin value={value} index={1}>
-      <NewCourse/>
+      <RegisterCourse/>
       </Admin>
       <Admin value={value} index={2}>
         Item Three

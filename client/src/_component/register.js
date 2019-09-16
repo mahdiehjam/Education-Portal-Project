@@ -140,10 +140,12 @@ class Register extends Component {
 
 Register.propTypes = {
     registerUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-    errors: state.errors
+    errors: state.errors,
+    auth: state.auth
 });
 
 export default connect(mapStateToProps,{ registerUser })(withRouter(Register))
