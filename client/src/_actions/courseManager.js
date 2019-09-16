@@ -19,7 +19,7 @@ export const GetTeacher = () => dispatch => {
                 
                 let users = {salam:'mahya'};
                 
-                    store.dispatch(setCourse(users));
+                    dispatch(setCourse(users));
                 
             
             })
@@ -34,6 +34,6 @@ export const GetTeacher = () => dispatch => {
 export const setCourse = users => {
     return {
         type: SET_COURSE,
-        payload: {users}
+        payload:  users 
     }
 }

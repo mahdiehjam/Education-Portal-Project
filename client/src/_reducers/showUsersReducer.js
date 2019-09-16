@@ -10,7 +10,7 @@ export default function(state = initialState, action ) {
         case SET_COURSE:
             return {
                 ...state,
-                users: action.payload.users
+                users: action.payload
             }
         default: 
             return state;
