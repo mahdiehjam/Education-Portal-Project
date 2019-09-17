@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { GetTeacher , registerCourse } from '../../_actions/index';
 import classnames from 'classnames';
 import { timingSafeEqual } from 'crypto';
+import Axios from 'axios';
 
 class RegisterCourse extends Component {
 
@@ -14,9 +15,10 @@ class RegisterCourse extends Component {
             name:'',
             status:'',
             teacher:'',
+            teachers: [],
             errors: {}
         }
-        GetTeacher();
+        
         this.handleInputChange = this.handleInputChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -34,9 +36,13 @@ class RegisterCourse extends Component {
             status:this.state.status,
             teacher:this.state.teacher
         }
+        console.log(course);
         this.props.registerCourse(course, this.props.history);
     }
 
+    GetTeachersList = ()=>{
+        
+    }
     componentWillReceiveProps(nextProps) {
         if(nextProps.errors) {
             this.setState({
@@ -45,15 +51,17 @@ class RegisterCourse extends Component {
         }
     }
 
-     componentDidMount() {
-        
+     componentWillMount() {
+        Axios.get('/api/users/teacher').then(res => {
+            this.setState({teachers:[...res.data]})
+            //console.log(res.data);
+        }).catch(err=>console.log('axios for getting teachers has err:'+ err))
     }  
 
 
     render() {
-        const { errors } = this.state;
-        const {users} = this.props.users;
-        console.log(users);
+        const { errors,teachers } = this.state;
+        console.log(teachers);
         return(
         <div className="container" style={{ marginTop: '50px', width: '700px'}}>
             <h2 style={{marginBottom: '40px'}}>Registration</h2>
@@ -73,44 +81,25 @@ class RegisterCourse extends Component {
                 </div>
 
                 <div className="form-group">
-{/*                     <input
-                    type="email"
-                    placeholder="Email"
-                    className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.email
-                    })}
-                    name="email"
-                    onChange={ this.handleInputChange }
-                    value={ this.state.email }
-                    /> */}
-                    <select name="status" id="status" className="form-control">
-                        <option value="I">Inprogress</option>
-                        <option value="D">Done</option>
+                    <select name ="status" id="status" className="form-control" onChange={ this.handleInputChange }>
+                        <option value="I" key='I'>Inprogress</option>
+                        <option value="D" key='D'>Done</option>
                     </select>
                     {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
                 </div>
-                <p><img src={users.avatar}/>teachers:{users.email}</p>
+               
                 <div className="form-group">
-                   {/*  <input
-                    type="text"
-                    placeholder="Role"
-                    className={classnames('form-control form-control-lg', {
-                        'is-invalid': errors.role
-                    })}
-                    name="role"
-                    onChange={ this.handleInputChange }
-                    value={ this.state.role }
-                    /> */}
                     
-                    <select name="teacher" id="teacher" className="form-control">
+                    <select name="teacher" id="teacher" className="form-control" onChange={ this.handleInputChange }>
                         
-                         {/*  /* {users.map(users=>{
-                            return <option value={users.id}>{users.name}</option>
-                        })} */ }
+                         {teachers.map(teacher=>{
+                            return <option value={teacher.id} key={teacher.id}>{teacher.name}</option>
+                        })} 
                         
                     </select>
                     {errors.role && (<div className="invalid-feedback">{errors.role}</div>)}
                 </div>
+
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary">
                         Register Course
