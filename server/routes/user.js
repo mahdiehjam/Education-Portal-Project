@@ -12,7 +12,6 @@ const User = require('../model/user');
 router.get('/', function (req, res, next) {
     
     User.find({}).then(userfind=>{
-      //res.send(userfind);
       res.json(userfind);
     }).catch(err=>{
       res.send('user does not show because ...' + err);

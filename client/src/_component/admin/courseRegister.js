@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { GetTeacher, registerCourse } from '../../_actions/index';
+import { registerCourse } from '../../_actions/index';
 import classnames from 'classnames';
-import { timingSafeEqual } from 'crypto';
 import Axios from 'axios';
+import { MDBBtn } from "mdbreact";
 
 class RegisterCourse extends Component {
 
@@ -43,7 +43,13 @@ class RegisterCourse extends Component {
         this.props.registerCourse(course, this.props.history);
     }
 
+    EditeCourse = (id) =>{
+        Axios.put('/api/edit'+id).then(response=>{})
+    }
 
+    deleteCourse = () =>{
+
+    }
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
             this.setState({
@@ -79,10 +85,12 @@ class RegisterCourse extends Component {
                 </tr>
                 
                     {courses.map(course=>{
-                        return <tr>
+                        return <tr key={course.id} id={course.id}>
                             <td>{course.name}</td>
                             <td>{course.teacher}</td>
                             <td>{course.status}</td>
+                            <td><MDBBtn onClick={this.EditeCourse(course.id)} color='info'>Edite</MDBBtn>  
+                            <MDBBtn onClick={this.deleteCourse} color='danger'>delete</MDBBtn></td>
                         </tr> 
                     })}
                </tbody>
