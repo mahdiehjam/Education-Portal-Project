@@ -12,6 +12,7 @@ import Login from './_component/Login';
 import Home from './_component/home';
 import newCourse from './_component/admin/newCourse';
 import Admin from './_component/admin/index';
+import Student from './_component/student/index';
 import Navbar from './_component/navbar';
 
 
@@ -40,6 +41,7 @@ class App extends Component {
                   <Route exact path="/login" component={ Login } />
                   <Route path="/admin" component={Admin} />
                   <Route path='/course' component={newCourse}/>
+                  <Route path="/student" component={Student} />
                 </div>
             </div>
           </Router>

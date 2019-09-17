@@ -6,19 +6,17 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import RegisterCourse from "./courseRegister";
-import Register from "../register";
-// import Charts from "./charts";
 
-function Admin(props) {
+
+function Student(props) {
   const { children, value, index, ...other } = props;
 
   return (
     <Typography
       component="div"
-      role="Admin"
+      role="Student"
       hidden={value !== index}
-      id={`scrollable-auto-Admin-${index}`}
+      id={`scrollable-auto-Student-${index}`}
       aria-labelledby={`scrollable-auto-tab-${index}`}
       {...other}
     >
@@ -27,7 +25,7 @@ function Admin(props) {
   );
 }
 
-Admin.propTypes = {
+Student.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
   value: PropTypes.any.isRequired,
@@ -36,7 +34,7 @@ Admin.propTypes = {
 function a11yProps(index) {
   return {
     id: `scrollable-auto-tab-${index}`,
-    'aria-controls': `scrollable-auto-Admin-${index}`,
+    'aria-controls': `scrollable-auto-Student-${index}`,
   };
 }
 
@@ -69,8 +67,8 @@ export default function ScrollableTabsButtonAuto() {
           scrollButtons="auto"
           aria-label="scrollable auto tabs example"
         >
-          <Tab label="add user" {...a11yProps(0)} />
-          <Tab label="add course" {...a11yProps(1)} />
+          <Tab label="Item one" {...a11yProps(0)} />
+          <Tab label="Item two" {...a11yProps(1)} />
           <Tab label="Item Three" {...a11yProps(2)} />
           <Tab label="Item Four" {...a11yProps(3)} />
           <Tab label="Item Five" {...a11yProps(4)} />
@@ -78,27 +76,27 @@ export default function ScrollableTabsButtonAuto() {
           <Tab label="Item Seven" {...a11yProps(6)} />
         </Tabs>
       </AppBar>
-      <Admin value={value} index={0}>
-      <Register />
-      </Admin>
-      <Admin value={value} index={1}>
-      <RegisterCourse/>
-      </Admin>
-      <Admin value={value} index={2}>
-      {/* <Charts/> */}Item three
-      </Admin>
-      <Admin value={value} index={3} >
+      <Student value={value} index={0}>
+        Item one
+      </Student>
+      <Student value={value} index={1}>
+        Item two
+      </Student>
+      <Student value={value} index={2}>
+        Item three
+      </Student>
+      <Student value={value} index={3} >
         Item Four
-      </Admin>
-      <Admin value={value} index={4}>
+      </Student>
+      <Student value={value} index={4}>
         Item Five
-      </Admin>
-      <Admin value={value} index={5}>
+      </Student>
+      <Student value={value} index={5}>
         Item Six
-      </Admin>
-      <Admin value={value} index={6}>
+      </Student>
+      <Student value={value} index={6}>
         Item Seven
-      </Admin>
+      </Student>
     </div>
   );
 }
