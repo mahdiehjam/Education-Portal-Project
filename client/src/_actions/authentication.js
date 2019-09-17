@@ -1,4 +1,3 @@
-import react from 'react';
 import axios from 'axios';
 import { GET_ERRORS, SET_CURRENT_USER } from './type';
 import setAuthToken from '../setAuthToken';
@@ -45,16 +44,6 @@ export const logoutUser = (history) => dispatch => {
     localStorage.removeItem('jwtToken');
     setAuthToken(false);
     dispatch(setCurrentUser({}));
-    history.push('/login');
+    history.push('/');
 }
 
-export const registerCourse = (course, history) => dispatch => {
-    axios.post('/course/create', course)
-            .then(res =>  history.push('/course') )
-            .catch(err => {
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err.response.data
-                });
-            });
-}

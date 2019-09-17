@@ -5,16 +5,18 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
 import { setCurrentUser, logoutUser } from './_actions/authentication';
 import store from './store';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import Register from './_component/register';
 import Login from './_component/Login';
 import Home from './_component/home';
 import newCourse from './_component/admin/newCourse';
 import Admin from './_component/admin/index';
+import Student from './_component/student/index';
 import Navbar from './_component/navbar';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
-//import 'bootstrap/dist/css/bootstrap.min.css';
+
+
 if(localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwt_decode(localStorage.jwtToken);
@@ -39,6 +41,7 @@ class App extends Component {
                   <Route exact path="/login" component={ Login } />
                   <Route path="/admin" component={Admin} />
                   <Route path='/course' component={newCourse}/>
+                  <Route path="/student" component={Student} />
                 </div>
             </div>
           </Router>

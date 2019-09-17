@@ -9,6 +9,28 @@ const validateLoginInput = require('../validation/login');
 
 const User = require('../model/user');
 
+router.get('/', function (req, res, next) {
+    
+    User.find({}).then(userfind=>{
+      res.json(userfind);
+    }).catch(err=>{
+      res.send('user does not show because ...' + err);
+    })
+    
+  });
+
+  router.get('/teacher', function (req, res, next) {
+    
+    User.find({role:'teacher'},'name').then(userfind=>{
+     
+        res.json(userfind);
+        res.send(userfind);
+    }).catch(err=>{
+      res.send('user does not show because ...' + err);
+    })
+    
+  });
+
 router.post('/register', function(req, res) {
 
     const { errors, isValid } = validateRegisterInput(req.body);

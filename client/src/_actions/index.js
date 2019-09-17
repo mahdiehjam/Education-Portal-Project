@@ -1,1 +1,2 @@
-export * from './simple.action';
+export * from './authentication';
+export * from './courseManager';
