@@ -6,12 +6,30 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
+class Student extends React.Component {
 
-function Student(props) {
-  const { children, value, index, ...other } = props;
+  constructor(props){
+    super(props);
+    const { children, value, index, ...other } = this.props;
+  }
+  
 
+  componentDidMount() {
+    if(this.props.auth.isAuthenticated) {
+        this.props.history.push('/');
+    }else{
+        this.props.history.push('/');
+        alert('not authenticated')
+       
+    }
+} 
+render(){
+  const { children, value, index, ...other } = this.props;
   return (
+    
     <Typography
       component="div"
       role="Student"
@@ -23,6 +41,8 @@ function Student(props) {
       <Box p={3}>{children}</Box>
     </Typography>
   );
+}
+  
 }
 
 Student.propTypes = {
@@ -46,13 +66,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function ScrollableTabsButtonAuto() {
+export  function ScrollableTabsButtonAuto() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
   function handleChange(event, newValue) {
     setValue(newValue);
   }
+  
  
   return (
     <div className={classes.root}>
@@ -100,3 +121,15 @@ export default function ScrollableTabsButtonAuto() {
     </div>
   );
 }
+
+ Student.propTypes = {
+  registerUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+}; 
+
+ const mapStateToProps = state => ({
+  errors: state.errors,
+  auth: state.auth
+}); 
+
+export default connect(mapStateToProps)(withRouter(Student))
