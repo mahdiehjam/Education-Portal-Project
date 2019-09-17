@@ -113,6 +113,7 @@ router.post('/login', (req, res) => {
                                 if(err) console.error('There is some error in token', err);
                                 else {
                                     res.json({
+                                        role: user.role,
                                         success: true,
                                         token: `Bearer ${token}`
                                     });
