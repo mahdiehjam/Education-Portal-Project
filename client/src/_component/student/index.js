@@ -123,7 +123,7 @@ export  function ScrollableTabsButtonAuto() {
 }
 
  Student.propTypes = {
-  registerUser: PropTypes.func.isRequired,
+  //registerUser: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired
 }; 
 
