@@ -3,8 +3,8 @@ import { GET_ERRORS, SET_COURSE } from './type';
 import store from '../store/index'
 
 export const registerCourse = (course, history) => dispatch => {
-    axios.post('api/users/course/create', course)
-            .then(res =>  history.push('/course') )
+    axios.post('/api/users/courses/create', course)
+            .then(res =>  alert('course successfully added!') )
             .catch(err => {
                 dispatch({
                     type: GET_ERRORS,
@@ -14,7 +14,7 @@ export const registerCourse = (course, history) => dispatch => {
 }
 
 export const GetTeacher = () => dispatch => {
-    axios.get('api/users/teacher')
+    axios.get('/api/users/teacher')
             .then(res => {
                 
                 let users = {salam:'mahya'};
