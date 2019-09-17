@@ -14,6 +14,8 @@ import newCourse from './_component/admin/newCourse';
 import Admin from './_component/admin/index';
 import Student from './_component/student/index';
 import Navbar from './_component/navbar';
+import DragAndDrop from './_component/teacher/teacher';
+
 
 
 
@@ -42,6 +44,7 @@ class App extends Component {
                   <Route path="/admin" component={Admin} />
                   <Route path='/course' component={newCourse}/>
                   <Route path="/student" component={Student} />
+                  <Route path="/teacher" component={DragAndDrop} />
                 </div>
             </div>
           </Router>
