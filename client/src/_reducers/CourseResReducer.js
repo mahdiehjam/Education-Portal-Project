@@ -2,7 +2,9 @@ import { SET_COURSE } from '../_actions/type';
 import isEmpty from '../validation/is-empty';
 
 const initialState = {
-    users: {}
+    
+    resStatus:'Nok',
+    
 }
 
 export default function(state = initialState, action ) {
@@ -10,7 +12,8 @@ export default function(state = initialState, action ) {
         case SET_COURSE:
             return {
                 ...state,
-                users: action.payload
+                resStatus: action.payload,
+               
             }
         default: 
             return state;
