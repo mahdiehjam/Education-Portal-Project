@@ -45,7 +45,7 @@ class RegisterCourse extends Component {
     }
 
     EditeCourse = (id) =>{
-        Axios.put('/api/edit'+id).then(response=>{})
+        Axios.put('/api/edit'+ id).then(response=>{})
     }
 
     deleteCourse = () =>{

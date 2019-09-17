@@ -47,13 +47,15 @@ class Register extends Component {
         }
     }
 
-   /*  componentDidMount() {
+     componentDidMount() {
         if(this.props.auth.isAuthenticated) {
             this.props.history.push('/');
         }else{
-            console.log('not authenticated')
+            this.props.history.push('/');
+            alert('not authenticated')
+           
         }
-    }  */
+    }  
 
 
     render() {

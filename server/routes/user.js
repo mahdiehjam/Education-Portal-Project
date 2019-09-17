@@ -93,6 +93,7 @@ router.post('/login', (req, res) => {
     
     User.findOne({email})
         .then(user => {
+            
             if(!user) {
                 errors.email = 'User not found'
                 return res.status(404).json(errors);
@@ -103,6 +104,7 @@ router.post('/login', (req, res) => {
                             const payload = {
                                 id: user.id,
                                 name: user.name,
+                                role: user.role,
                                 avatar: user.avatar
                             }
                             jwt.sign(payload, 'secret', {
@@ -111,6 +113,7 @@ router.post('/login', (req, res) => {
                                 if(err) console.error('There is some error in token', err);
                                 else {
                                     res.json({
+                                        role: user.role,
                                         success: true,
                                         token: `Bearer ${token}`
                                     });
