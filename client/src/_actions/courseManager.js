@@ -4,36 +4,28 @@ import store from '../store/index'
 
 export const registerCourse = (course, history) => dispatch => {
     axios.post('/api/users/courses/create', course)
-            .then(res =>  alert('course successfully added!') )
-            .catch(err => {
-                dispatch({
-                    type: GET_ERRORS,
-                    payload: err.response.data
-                });
-            });
-}
-
-export const GetTeacher = () => dispatch => {
-    axios.get('/api/users/teacher')
             .then(res => {
-                
-                let users = {salam:'mahya'};
-                
-                    dispatch(setCourse(users));
-                
-            
-            })
+                alert('course successfully added!')
+                console.log(res.status);
+                if(res.status === 200){
+                    dispatch(setCourse('Ok'))
+                }else{
+                    dispatch(setCourse('Nok'))
+                }
+                //return res.status;
+            } )
             .catch(err => {
                 dispatch({
                     type: GET_ERRORS,
-                    payload: err.response.data
+                    payload:  ((err||{}).response||{}).data || 'Error unexpected'
                 });
             });
 }
 
-export const setCourse = users => {
+
+export const setCourse = response => {
     return {
         type: SET_COURSE,
-        payload:  users 
+        payload:  response 
     }
 }
