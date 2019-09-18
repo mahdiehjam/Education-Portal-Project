@@ -18,12 +18,30 @@ export const registerUser = (user, history) => dispatch => {
 export const loginUser = (user,history) => dispatch => {
     axios.post('/api/users/login', user)
             .then(res => {
-                const { token } = res.data;
+                const { token,role } = res.data;
                 localStorage.setItem('jwtToken', token);
                 setAuthToken(token);
                 const decoded = jwt_decode(token);
                 dispatch(setCurrentUser(decoded));
-                history.push('/admin');
+                //const {role} = this.props.auth.user
+                debugger
+                console.log(role)
+                
+                switch(role){
+                    
+                    case 'student':
+                        history.push('/student');
+                        break;
+                    case 'teacher':
+                        history.push('/teacher');
+                        break;
+                    case 'admin':
+                        history.push('/dashboard');
+                        break;
+                    default:
+                        alert('you are not registerd!')   
+                        break;         
+                }
             })
             .catch(err => {
                 dispatch({
@@ -46,4 +64,3 @@ export const logoutUser = (history) => dispatch => {
     dispatch(setCurrentUser({}));
     history.push('/');
 }
-

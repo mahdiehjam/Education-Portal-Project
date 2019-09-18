@@ -4,6 +4,7 @@ const gravatar = require('gravatar');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const passport = require('passport');
+const multer = require('multer');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 
@@ -12,7 +13,6 @@ const User = require('../model/user');
 router.get('/', function (req, res, next) {
     
     User.find({}).then(userfind=>{
-      res.send(userfind);
       res.json(userfind);
     }).catch(err=>{
       res.send('user does not show because ...' + err);
@@ -94,6 +94,7 @@ router.post('/login', (req, res) => {
     
     User.findOne({email})
         .then(user => {
+            
             if(!user) {
                 errors.email = 'User not found'
                 return res.status(404).json(errors);
@@ -104,6 +105,7 @@ router.post('/login', (req, res) => {
                             const payload = {
                                 id: user.id,
                                 name: user.name,
+                                role: user.role,
                                 avatar: user.avatar
                             }
                             jwt.sign(payload, 'secret', {
@@ -112,6 +114,7 @@ router.post('/login', (req, res) => {
                                 if(err) console.error('There is some error in token', err);
                                 else {
                                     res.json({
+                                        role: user.role,
                                         success: true,
                                         token: `Bearer ${token}`
                                     });
@@ -123,7 +126,7 @@ router.post('/login', (req, res) => {
                             return res.status(400).json(errors);
                         }
                     });
-        });
+});
 });
 
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => { 
@@ -135,4 +138,27 @@ router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) =
     });
 });
 
+
+router.post('/upload',function(req, res) {
+     
+    var storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+        cb(null, 'public/HomeWorks')
+      },
+      filename: function (req, file, cb) {
+        cb(null, Date.now() + '-' +file.originalname )
+      }
+  })
+  var upload = multer({ storage: storage }).single('file')
+    upload(req, res, function (err) {
+           if (err instanceof multer.MulterError) {
+               return res.status(500).json(err)
+           } else if (err) {
+               return res.status(500).json(err)
+           }
+      return res.status(200).send(req.file)
+
+    })
+
+});
 module.exports = router;

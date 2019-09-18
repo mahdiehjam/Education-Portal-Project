@@ -4,14 +4,16 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const passport = require('passport');
+const cors = require('cors');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const users = require('./routes/user');
 const courses = require('./routes/course');
 
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+
 const app = express();
 app.use(passport.initialize());
 require('./passport')(passport); 
@@ -33,11 +35,12 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(cors());
 
 app.use('/', indexRouter);
 //app.use('/users', usersRouter);
 app.use('/api/users', users);
-app.use('api/users/courses', courses);
+app.use('/api/users/courses', courses);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
