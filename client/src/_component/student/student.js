@@ -1,11 +1,8 @@
-
-
-
 import React, { Component } from 'react'
 import { DropzoneArea } from 'material-ui-dropzone'
 import axios from 'axios';
 
-class Teacher extends Component {
+class Student extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -50,4 +47,4 @@ class Teacher extends Component {
 
 
 
-export default Teacher;
+export default Student;
