@@ -4,7 +4,8 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Avatar, Typography } from '@material-ui/core';
-
+import {withRouter} from 'react-router-dom';
+import {connect} from 'react-redux'
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
@@ -26,12 +27,13 @@ const Profile = props => {
 
   const classes = useStyles();
 
-  const user = {
+  /* const user = {
     name: 'Shen Zhi',
     avatar: '/images/avatars/avatar_11.png',
     bio: 'Brain Director'
-  };
+  }; */
 
+  const {user}=props.auth;
   return (
     <div
       {...rest}
@@ -56,7 +58,13 @@ const Profile = props => {
 };
 
 Profile.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  auth: PropTypes.object.isRequired
 };
 
-export default Profile;
+const mapStateToProps = state => ({
+    errors: state.errors,
+    auth: state.auth
+});
+
+export default connect(mapStateToProps)(withRouter(Profile))

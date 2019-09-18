@@ -35,12 +35,12 @@ class Student extends Component {
     console.log(this.state.selectedFile);
   }
   render() {
-    return <>
+    return <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'500px',flexDirection:'column'}}>
 
-      <input type="file" name="file" onChange={this.onChangeHandler} />
-      <button type="button" class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
+    <input type="file" style={{width:'30%',}} name="file" onChange={this.onChangeHandler} />
+    <button type="button" style={{width:'30%',}} class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
 
-    </>
+  </div>
   }
 }
 
