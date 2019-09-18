@@ -22,7 +22,6 @@ export const registerCourse = (course, history) => dispatch => {
             });
 }
 
-
 export const setCourse = response => {
     return {
         type: SET_COURSE,

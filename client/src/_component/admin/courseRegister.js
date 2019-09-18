@@ -122,7 +122,8 @@ class RegisterCourse extends Component {
                     </div>
 
                     <div className="form-group">
-                        <select name="status" id="status" className="form-control" onChange={this.handleInputChange}>
+                        <select name="status" id="statu
+s" className="form-control" onChange={this.handleInputChange}>
                             <option value='notdefine'>choose status</option>
                             <option value="I" key='I'>Inprogress</option>
                             <option value="D" key='D'>Done</option>
@@ -169,4 +170,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect(mapStateToProps, { registerCourse })(withRouter(RegisterCourse))
-

@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 
 export const registerUser = (user, history) => dispatch => {
     axios.post('/api/users/register', user)
-            .then(res =>  history.push('/login') )
+            .then(res =>  alert('user successfully added') )
             .catch(err => {
                 dispatch({
                     type: GET_ERRORS,
@@ -24,8 +24,9 @@ export const loginUser = (user,history) => dispatch => {
                 const decoded = jwt_decode(token);
                 dispatch(setCurrentUser(decoded));
                 //const {role} = this.props.auth.user
-                console.log(role);
-                debugger
+                //debugger
+                console.log(role)
+                
                 switch(role){
                     
                     case 'student':
@@ -35,7 +36,7 @@ export const loginUser = (user,history) => dispatch => {
                         history.push('/teacher');
                         break;
                     case 'admin':
-                        history.push('/admin');
+                        history.push('/dashboard');
                         break;
                     default:
                         alert('you are not registerd!')   
@@ -63,4 +64,3 @@ export const logoutUser = (history) => dispatch => {
     dispatch(setCurrentUser({}));
     history.push('/');
 }
-

@@ -5,18 +5,16 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from './setAuthToken';
 import { setCurrentUser, logoutUser } from './_actions/authentication';
 import store from './store';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import './App.css';
+import './App.scss';
 import Register from './_component/register';
 import Login from './_component/Login';
 import Home from './_component/home';
 import newCourse from './_component/admin/newCourse';
 import Admin from './_component/admin/index';
-import Student from './_component/student/index';
+import Student from './_component/student/student';
 import Navbar from './_component/navbar';
-import DragAndDrop from './_component/teacher/teacher';
-
-
+import 'bootstrap/dist/css/bootstrap.min.css';
+import Teacher from './_component/teacher/teacher';
 
 
 if(localStorage.jwtToken) {
@@ -41,10 +39,10 @@ class App extends Component {
                 <div className="container">
                   <Route exact path="/register" component={ Register } />
                   <Route exact path="/login" component={ Login } />
-                  <Route path="/admin" component={Admin} />
+                  <Route path="/dashboard" component={Admin} />
                   <Route path='/course' component={newCourse}/>
-                  <Route path="/student" component={Student} />
-                  <Route path="/teacher" component={DragAndDrop} />
+                  <Route path='/teacher' component={Teacher}/>
+                  <Route path='/student' component={Student}/>
                 </div>
             </div>
           </Router>

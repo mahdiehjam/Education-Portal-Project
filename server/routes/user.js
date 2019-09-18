@@ -126,7 +126,7 @@ router.post('/login', (req, res) => {
                             return res.status(400).json(errors);
                         }
                     });
-        });
+});
 });
 
 router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => { 
