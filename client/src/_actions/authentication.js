@@ -25,7 +25,9 @@ export const loginUser = (user,history) => dispatch => {
                 dispatch(setCurrentUser(decoded));
                 //const {role} = this.props.auth.user
                 console.log(role)
+                debugger
                 switch(role){
+                    
                     case 'student':
                         history.push('/student');
                         break;
