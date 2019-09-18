@@ -24,7 +24,7 @@ export const loginUser = (user,history) => dispatch => {
                 const decoded = jwt_decode(token);
                 dispatch(setCurrentUser(decoded));
                 //const {role} = this.props.auth.user
-                console.log(role)
+                console.log(role);
                 debugger
                 switch(role){
                     

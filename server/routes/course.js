@@ -10,6 +10,7 @@ router.get('/', (req, res) => {
             id: req.courses.id,
             name: req.courses.name,
             teacher: req.course.teacher
+
         })
     })
 })
