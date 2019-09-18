@@ -13,7 +13,7 @@ router.get('/', function (req, res, next) {
     id: 2,
     name: "King Arthur",
     password: 'king-arthur'
-  }]); */ 
+  }]); */ C
 
   User.find({}).then(userfind=>{
     res.send(userfind);

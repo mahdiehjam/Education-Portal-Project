@@ -11,13 +11,12 @@ import Login from './_component/Login';
 import Home from './_component/home';
 import newCourse from './_component/admin/newCourse';
 import Admin from './_component/admin/index';
+import Student from './_component/student/student';
 import Navbar from './_component/navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Teacher from './_component/teacher/teacher';
-import Student from './_component/student/student';
 
 
-//import 'bootstrap/dist/css/bootstrap.min.css';
 if(localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
     const decoded = jwt_decode(localStorage.jwtToken);
