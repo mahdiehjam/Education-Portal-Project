@@ -12,7 +12,7 @@ import Login from './_component/Login';
 import Home from './_component/home';
 import newCourse from './_component/admin/newCourse';
 import Admin from './_component/admin/index';
-import Student from './_component/student/index';
+import Student from './_component/student/student';
 import Navbar from './_component/navbar';
 import DragAndDrop from './_component/teacher/teacher';
 
