@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { DropzoneArea } from 'material-ui-dropzone'
 import axios from 'axios';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 class Student extends Component {
   constructor(props) {
     super(props);
@@ -31,9 +33,17 @@ class Student extends Component {
         console.log(res.statusText)
       })
   }
+  
   componentDidMount() {
     console.log(this.state.selectedFile);
-  }
+    if(this.props.auth.isAuthenticated) {
+        //this.props.history.push('/');
+    }else{
+        this.props.history.push('/');
+        alert('not authenticated')
+       
+    }
+} 
   render() {
     return <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'500px',flexDirection:'column'}}>
 
@@ -47,4 +57,14 @@ class Student extends Component {
 
 
 
-export default Student;
+Student.propTypes = {
+  //StudentUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  errors: state.errors,
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(withRouter(Student))
