@@ -5,6 +5,7 @@ import { flexbox } from '@material-ui/system';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import DownloadFile from './Download';
 class Teacher extends Component {
   constructor(props) {
     super(props);
@@ -49,7 +50,7 @@ class Teacher extends Component {
 
       <input type="file" style={{width:'30%',}} name="file" onChange={this.onChangeHandler} />
       <button type="button" style={{width:'30%',}} class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
-
+      <DownloadFile />
     </div>
   }
 }
