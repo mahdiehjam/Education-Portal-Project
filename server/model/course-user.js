@@ -1,15 +1,17 @@
 const mongoose = require('mongoose');
+const Course = require('../model/course');
+const User = require('../model/user');
 const Schema = mongoose.Schema;
 
 const CUSchema = new Schema({
  
-    course:{
-        type: mongoose.Schema.Types.ObjectId,
+    Course:{
+        type: Schema.Types.ObjectId,
         ref: 'Course',
       },
       
-      user:{
-        type: mongoose.Schema.Types.ObjectId,
+    User:{
+        type: Schema.Types.ObjectId,
         ref: 'User',
       }
 

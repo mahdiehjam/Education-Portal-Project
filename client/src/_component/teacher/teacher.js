@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { DropzoneArea } from 'material-ui-dropzone'
 import axios from 'axios';
 import { flexbox } from '@material-ui/system';
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import DownloadFile from './Download';
 class Teacher extends Component {
   constructor(props) {
     super(props);
@@ -34,13 +37,20 @@ class Teacher extends Component {
   }
   componentDidMount() {
     console.log(this.state.selectedFile);
-  }
+    if(this.props.auth.isAuthenticated) {
+       // this.props.history.push('/');
+    }else{
+        this.props.history.push('/');
+        alert('not authenticated')
+       
+    }
+} 
   render() {
     return <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'500px',flexDirection:'column'}}>
 
       <input type="file" style={{width:'30%',}} name="file" onChange={this.onChangeHandler} />
       <button type="button" style={{width:'30%',}} class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
-
+      <DownloadFile />
     </div>
   }
 }
@@ -48,4 +58,14 @@ class Teacher extends Component {
 
 
 
-export default Teacher;
+Teacher.propTypes = {
+  //TeacherUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
+};
+
+const mapStateToProps = state => ({
+  errors: state.errors,
+  auth: state.auth
+});
+
+export default connect(mapStateToProps)(withRouter(Teacher))

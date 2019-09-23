@@ -7,7 +7,7 @@ const passport = require('passport');
 const multer = require('multer');
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
-
+const path = require('path');
 const User = require('../model/user');
 
 router.get('/', function (req, res, next) {
@@ -31,6 +31,8 @@ router.get('/', function (req, res, next) {
     })
     
   });
+
+//login and register , authentication 
 
 router.post('/register', function(req, res) {
 
@@ -138,12 +140,13 @@ router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) =
     });
 });
 
+//uploade file
 
 router.post('/upload',function(req, res) {
      
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
-        cb(null, 'public/HomeWorks')
+        cb(null, 'public/HomeWork/HomeWorksStudent')
       },
       filename: function (req, file, cb) {
         cb(null, Date.now() + '-' +file.originalname )
@@ -161,4 +164,30 @@ router.post('/upload',function(req, res) {
     })
 
 });
+
+//download file
+
+
+/* var download = require('download-file')
+ 
+var url = "http://i.imgur.com/G9bDaPH.jpg"
+ 
+var options = {
+    directory: "./public/HomeWorksTeacher",
+    filename: "cat.gif"
+}
+ 
+download(url, options, function(err){
+    if (err) throw err
+    console.log("meow")
+}) */
+
+
+router.get('/download?file(*)',(req, res) => {
+    var file = req.params.file;
+    var fileLocation = path.join('./public/HomeWorks/HomeWorksStudent',file);
+    console.log(fileLocation);
+    res.download(fileLocation, file); 
+  });
+
 module.exports = router;
