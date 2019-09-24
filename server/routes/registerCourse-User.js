@@ -14,6 +14,22 @@ router.get('/',(req,res)=>{
     
 })
 
+router.get('/get-students',(req,res)=>{
+
+  User.find({role:'student'}).then(userFind=>{
+    res.send(userFind)
+  })
+
+})
+
+router.get('/get-courses',(req,res)=>{
+
+  Course.find({}).then(courseFind=>{
+    res.send(courseFind)
+  })
+
+})
+
  router.post('/create',(req,res,next)=>{
 
    

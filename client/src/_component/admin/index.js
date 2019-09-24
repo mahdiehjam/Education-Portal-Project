@@ -13,6 +13,7 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import '../../App.scss';
 import validators from '../../common/validators';
 import Routes from '../../Routes';
+import RegisterCourseUser from './registerCourseUser';
 
 const browserHistory = createBrowserHistory();
 
@@ -43,6 +44,7 @@ class Admin extends Component {
     return (
       <ThemeProvider theme={theme}>
         <Router history={browserHistory}>
+          <RegisterCourseUser/>
           <Routes />
         </Router>
       </ThemeProvider>
