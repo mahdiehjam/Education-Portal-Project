@@ -18,6 +18,7 @@ class RegisterCourseUser extends Component {
             course: '',
             students: [],
             courses:[],
+            CoursesUser:[],
             errors: {}
         }
         this.result = 0;
@@ -33,18 +34,18 @@ class RegisterCourseUser extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        // const { courses } = this.state;
+         const { CoursesUser } = this.state;
         const CourseUser = {
             student: this.state.student,
             course: this.state.course
         }
         console.log(CourseUser);
-        //this.setState({ courses: [...courses, course] });
+        this.setState({ CoursesUser: [...CoursesUser, CourseUser] });
         this.props.registerCourseUser(CourseUser, this.props.history);
     }
 
-    EditeCourse = (id) => {
-        Axios.put('/api/edit' + id).then(response => { })
+    EditeCourseuser = (id) => {
+      //  Axios.put('/api/edit' + id).then(response => { })
     }
 
     deleteCourse = () => {
@@ -75,32 +76,30 @@ class RegisterCourseUser extends Component {
     }
 
     createCourseAdded = () => {
-        //const { courses } = this.state;
-        //const { resStatus } = this.props.courseStatus;
-        //this.result = (resStatus == 'Ok') ? true : false;
-        //console.log('resstause: '+ resStatus)
-        //console.log('result: '+this.result);
-        /* return <>
+        const { CoursesUser } = this.state;
+        const { resStatus } = this.props.courseStatus;
+        this.result = (resStatus == 'Ok') ? true : false;
+        console.log('resstause: '+ resStatus)
+        console.log('result: '+this.result);
+         return <>
             {!this.result || <table>
                 <tbody>
                     <tr>
-                        <th>name</th>
-                        <th>teacher</th>
-                        <th>status</th>
+                        <th>Course name</th>
+                        <th>Student name</th>
                     </tr>
 
-                    {courses.map(course => {
-                        return <tr key={course.id} id={course.id}>
-                            <td>{course.name}</td>
-                            <td>{course.teacher}</td>
-                            <td>{course.status}</td>
-                            <td><MDBBtn onClick={this.EditeCourse(course.id)} color='info'>Edite</MDBBtn>
-                                <MDBBtn onClick={this.deleteCourse} color='danger'>delete</MDBBtn></td>
+                    {CoursesUser.map(courseuser => {
+                        return <tr key={courseuser.id} id={courseuser.id}>
+                            <td>{courseuser.course}</td>
+                            <td>{courseuser.student}</td>
+                            <td><MDBBtn onClick={this.EditeCourseuser(courseuser.id)} color='info'>Edite</MDBBtn>
+                                <MDBBtn onClick={this.deleteCourseuser} color='danger'>delete</MDBBtn></td>
                         </tr>
                     })}
                 </tbody>
             </table>}
-        </> */
+        </> 
     }
 
 
@@ -147,7 +146,7 @@ class RegisterCourseUser extends Component {
                 </form>
 
                 <div>
-                   {/*  {this.createCourseAdded()} */}
+                   {this.createCourseAdded()}  
                 </div>
             </div>
         )
@@ -164,4 +163,4 @@ const mapStateToProps = state => ({
     courseStatus: state.courseStatus
 });
 
-export default connect(mapStateToProps, { registerCourseUser })(withRouter(registerCourseUser))
+export default connect(mapStateToProps, { registerCourseUser })(withRouter(RegisterCourseUser))

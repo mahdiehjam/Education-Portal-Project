@@ -24,7 +24,7 @@ router.get('/', function (req, res, next) {
     
     User.find({role:'teacher'},'name').then(userfind=>{
      
-        res.json(userfind);
+       // res.json(userfind);
         res.send(userfind);
     }).catch(err=>{
       res.send('user does not show because ...' + err);

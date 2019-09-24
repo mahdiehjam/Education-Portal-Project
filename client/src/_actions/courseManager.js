@@ -26,12 +26,12 @@ export const registerCourseUser = (CourseUser, history) => dispatch => {
     axios.post('/api/users/courses-user/create', CourseUser)
             .then(res => {
                 alert(`${res} successfully registered!`)
-                /* console.log(res.status);
+                 console.log(res.status);
                 if(res.status === 200){
                     dispatch(setCourse('Ok'))
                 }else{
                     dispatch(setCourse('Nok'))
-                } */
+                } 
                 //return res.status;
             } )
             .catch(err => {

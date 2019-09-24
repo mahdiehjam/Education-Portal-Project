@@ -69,8 +69,8 @@ const Sidebar = props => {
       icon: <TextFieldsIcon />
     },
     {
-      title: 'Account',
-      href: '/account',
+      title: 'registerCourseUser',
+      href: '/registerCourseUser',
       icon: <AccountBoxIcon />
     },
     {
