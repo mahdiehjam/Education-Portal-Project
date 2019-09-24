@@ -11,10 +11,10 @@ import Login from './_component/Login';
 import Home from './_component/home';
 import newCourse from './_component/admin/newCourse';
 import Admin from './_component/admin/index';
-import Student from './_component/student/student';
 import Navbar from './_component/navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Teacher from './_component/teacher/teacher';
+import student from './_component/student/student';
 
 
 if(localStorage.jwtToken) {
@@ -42,7 +42,7 @@ class App extends Component {
                   <Route path="/dashboard" component={Admin} />
                   <Route path='/course' component={newCourse}/>
                   <Route path='/teacher' component={Teacher}/>
-                  <Route path='/student' component={Student}/>
+                  <Route path='/student' component={student}/>
                 </div>
             </div>
           </Router>
