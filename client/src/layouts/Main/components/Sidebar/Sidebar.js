@@ -59,10 +59,15 @@ const Sidebar = props => {
       icon: <ShoppingBasketIcon />
     },
     {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />
-    }
+      title: 'Charts',
+      href: '/typography',
+      icon: <TextFieldsIcon />
+    },
+    {
+      title: 'registerCourseUser',
+      href: '/registerCourseUser',
+      icon: <AccountBoxIcon />
+    },
   ];
 
   return (
@@ -83,7 +88,7 @@ const Sidebar = props => {
           className={classes.nav}
           pages={pages}
         />
-        <UpgradePlan />
+        
       </div>
     </Drawer>
   );

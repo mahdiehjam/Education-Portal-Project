@@ -42,10 +42,17 @@ class RegisterCourse extends Component {
         console.log(course);
         this.setState({ courses: [...courses, course] });
         this.props.registerCourse(course, this.props.history);
+        this.setState({
+            
+        name: '',
+        status: '',
+        teacher: ''
+    })
+    
     }
 
     EditeCourse = (id) =>{
-        Axios.put('/api/edit'+ id).then(response=>{})
+       // Axios.put('/api/edit'+ id).then(response=>{})
     }
 
     deleteCourse = () =>{

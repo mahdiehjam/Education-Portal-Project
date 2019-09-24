@@ -10,7 +10,7 @@ const CUSchema = new Schema({
         ref: 'Course',
       },
       
-    User:{
+    Student:{
         type: Schema.Types.ObjectId,
         ref: 'User',
       }

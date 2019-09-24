@@ -2,20 +2,23 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { registerCourse } from '../../_actions/index';
+import { registerCourseUser } from '../../_actions/index';
 import classnames from 'classnames';
 import Axios from 'axios';
 import { MDBBtn } from "mdbreact";
 
 
-class RegisterCourse extends Component {
+class RegisterCourseUser extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            
-            student:'',
-            course:'',
+
+            student: '',
+            course: '',
+            students: [],
+            courses:[],
+            CoursesUser:[],
             errors: {}
         }
         this.result = 0;
@@ -31,21 +34,21 @@ class RegisterCourse extends Component {
 
     handleSubmit(e) {
         e.preventDefault();
-        const { courses } = this.state;
-        const course = {
+         const { CoursesUser } = this.state;
+        const CourseUser = {
             student: this.state.student,
             course: this.state.course
         }
-        console.log(course);
-        this.setState({ courses: [...courses, course] });
-        this.props.registerCourse(course, this.props.history);
+        console.log(CourseUser);
+        this.setState({ CoursesUser: [...CoursesUser, CourseUser] });
+        this.props.registerCourseUser(CourseUser, this.props.history);
     }
 
-    EditeCourse = (id) =>{
-        Axios.put('/api/edit'+ id).then(response=>{})
+    EditeCourseuser = (id) => {
+      //  Axios.put('/api/edit' + id).then(response => { })
     }
 
-    deleteCourse = () =>{
+    deleteCourse = () => {
 
     }
     componentWillReceiveProps(nextProps) {
@@ -57,9 +60,14 @@ class RegisterCourse extends Component {
     }
 
     componentWillMount() {
-        /* Axios.get('/api/users/courses-user').then(res => {
+        Axios.get('/api/users/courses-user/get-students').then(res => {
             this.setState({ students: [...res.data] })
-        }).catch(err => console.log('axios for getting teachers has err:' + err)) */
+
+            Axios.get('/api/users/courses-user/get-courses').then(res => {
+                this.setState({ courses: [...res.data] })
+            }).catch(err => console.log('axios for getting courses has err:' + err))
+
+        }).catch(err => console.log('axios for getting students has err:' + err))
     }
 
     componentDidMount() {
@@ -68,60 +76,62 @@ class RegisterCourse extends Component {
     }
 
     createCourseAdded = () => {
-        const { courses } = this.state;
+        const { CoursesUser } = this.state;
         const { resStatus } = this.props.courseStatus;
         this.result = (resStatus == 'Ok') ? true : false;
         console.log('resstause: '+ resStatus)
         console.log('result: '+this.result);
-        return <>
+         return <>
             {!this.result || <table>
                 <tbody>
-                <tr>
-                    <th>name</th>
-                    <th>teacher</th>
-                    <th>status</th>
-                </tr>
-                
-                    {courses.map(course=>{
-                        return <tr key={course.id} id={course.id}>
-                            <td>{course.name}</td>
-                            <td>{course.teacher}</td>
-                            <td>{course.status}</td>
-                            <td><MDBBtn onClick={this.EditeCourse(course.id)} color='info'>Edite</MDBBtn>  
-                            <MDBBtn onClick={this.deleteCourse} color='danger'>delete</MDBBtn></td>
-                        </tr> 
+                    <tr>
+                        <th>Course name</th>
+                        <th>Student name</th>
+                    </tr>
+
+                    {CoursesUser.map(courseuser => {
+                        return <tr key={courseuser.id} id={courseuser.id}>
+                            <td>{courseuser.course}</td>
+                            <td>{courseuser.student}</td>
+                            <td><MDBBtn onClick={this.EditeCourseuser(courseuser.id)} color='info'>Edite</MDBBtn>
+                                <MDBBtn onClick={this.deleteCourseuser} color='danger'>delete</MDBBtn></td>
+                        </tr>
                     })}
-               </tbody>
+                </tbody>
             </table>}
-        </>
+        </> 
     }
 
 
     render() {
-        const { errors, teachers } = this.state;
-        //console.log(teachers);
+        const { errors, students,courses } = this.state;
+        console.log(students);
+        console.log(courses);
         return (
             <div className="container" style={{ marginTop: '50px', width: '700px' }}>
                 <h2 style={{ marginBottom: '40px' }}>Registration</h2>
                 <form onSubmit={this.handleSubmit}>
-                    
+
                     <div className="form-group">
-                        <select name="status" id="statu
-s" className="form-control" onChange={this.handleInputChange}>
-                            <option value='notdefine'>choose status</option>
-                            <option value="I" key='I'>Inprogress</option>
-                            <option value="D" key='D'>Done</option>
+
+                        <select name="student" id="student" className="form-control" onChange={this.handleInputChange}>
+
+                            <option value='notdefine'>choose student</option>
+                            {students.map(student => {
+                                return <option value={student.id} key={student.id}>{student.name}</option>
+                            })}
+
                         </select>
-                        {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
+                        {errors.role && (<div className="invalid-feedback">{errors.role}</div>)}
                     </div>
 
                     <div className="form-group">
 
-                        <select name="teacher" id="teacher" className="form-control" onChange={this.handleInputChange}>
+                        <select name="course" id="course" className="form-control" onChange={this.handleInputChange}>
 
-                            <option value='notdefine'>choose teacher</option>    
-                            {teachers.map(teacher => {
-                                return <option value={teacher.id} key={teacher.id}>{teacher.name}</option>
+                            <option value='notdefine'>choose course</option>
+                            {courses.map(course => {
+                                return <option value={course.id} key={course.id}>{course.name}</option>
                             })}
 
                         </select>
@@ -136,16 +146,16 @@ s" className="form-control" onChange={this.handleInputChange}>
                 </form>
 
                 <div>
-                    {this.createCourseAdded()}
+                   {this.createCourseAdded()}  
                 </div>
             </div>
         )
     }
 }
 
-RegisterCourse.propTypes = {
-    registerCourse: PropTypes.func.isRequired,
-   // resStatus: PropTypes.object.isRequired
+RegisterCourseUser.propTypes = {
+    registerCourseUser: PropTypes.func.isRequired,
+    // resStatus: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -153,4 +163,4 @@ const mapStateToProps = state => ({
     courseStatus: state.courseStatus
 });
 
-export default connect(mapStateToProps, { registerCourse })(withRouter(RegisterCourse))
+export default connect(mapStateToProps, { registerCourseUser })(withRouter(RegisterCourseUser))

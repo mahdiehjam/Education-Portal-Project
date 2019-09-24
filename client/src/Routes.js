@@ -3,6 +3,7 @@ import { Switch, Redirect } from 'react-router-dom';
 
 import { RouteWithLayout } from './_component';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
+import RegisterCourseUser from './_component/admin/registerCourseUser';
 
 import {
   Dashboard as DashboardView,
@@ -41,6 +42,12 @@ const Routes = () => {
         exact
         layout={MainLayout}
         path="/products"
+      />
+      <RouteWithLayout
+        component={RegisterCourseUser}
+        exact
+        layout={MainLayout}
+        path="/registerCourseUser"
       />
       {/* <RouteWithLayout
         component={TypographyView}
