@@ -1,187 +1,71 @@
-import React, { useState } from 'react';
-import clsx from 'clsx';
+import React, { Component } from 'react'
+import { DropzoneArea } from 'material-ui-dropzone'
+import axios from 'axios';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-import PerfectScrollbar from 'react-perfect-scrollbar';
-import { makeStyles } from '@material-ui/styles';
-import {
-  Card,
-  CardActions,
-  CardContent,
-  Avatar,
-  Checkbox,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography,
-  TablePagination
-} from '@material-ui/core';
+import { withRouter } from 'react-router-dom';
 
-import { getInitials } from '../../../../helpers';
+class Student extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedFile: null
+    }
 
-const useStyles = makeStyles(theme => ({
-  root: {},
-  content: {
-    padding: 0
-  },
-  inner: {
-    minWidth: 1050
-  },
-  nameContainer: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  avatar: {
-    marginRight: theme.spacing(2)
-  },
-  actions: {
-    justifyContent: 'flex-end'
   }
-}));
+ 
+  onChangeHandler = event => {
 
-const UsersTable = props => {
-  const { className, users, ...rest } = props;
+    console.log(event.target.files[0])
+    this.setState({
+      selectedFile: event.target.files[0],
+      loaded: 0,
+    })
 
-  const classes = useStyles();
+  }
+  onClickHandler = () => {
 
-  const [selectedUsers, setSelectedUsers] = useState([]);
-  const [rowsPerPage, setRowsPerPage] = useState(10);
-  const [page, setPage] = useState(0);
-
-  const handleSelectAll = event => {
-    const { users } = props;
-
-    let selectedUsers;
-
-    if (event.target.checked) {
-      selectedUsers = users.map(user => user.id);
-    } else {
-      selectedUsers = [];
+    const data = new FormData()
+    data.append('file', this.state.selectedFile)
+    axios.post("/api/users/upload", data, {
+      // receive two    parameter endpoint url ,form data
+    })
+      .then(res => { // then print response status
+        console.log(res.statusText)
+      })
+  }
+  
+  componentDidMount() {
+    console.log(this.state.selectedFile);
+    if(this.props.auth.isAuthenticated) {
+        //this.props.history.push('/');
+    }else{
+        this.props.history.push('/');
+        alert('not authenticated')
+       
     }
+} 
+  render() {
+    return <div style={{display:'flex',justifyContent:'center',alignItems:'center',height:'500px',flexDirection:'column'}}>
 
-    setSelectedUsers(selectedUsers);
-  };
+    <input type="file" style={{width:'30%',}} name="file" onChange={this.onChangeHandler} />
+    <button type="button" style={{width:'30%',}} class="btn btn-success btn-block" onClick={this.onClickHandler}>Upload</button>
 
-  const handleSelectOne = (event, id) => {
-    const selectedIndex = selectedUsers.indexOf(id);
-    let newSelectedUsers = [];
+  </div>
+  }
+}
 
-    if (selectedIndex === -1) {
-      newSelectedUsers = newSelectedUsers.concat(selectedUsers, id);
-    } else if (selectedIndex === 0) {
-      newSelectedUsers = newSelectedUsers.concat(selectedUsers.slice(1));
-    } else if (selectedIndex === selectedUsers.length - 1) {
-      newSelectedUsers = newSelectedUsers.concat(selectedUsers.slice(0, -1));
-    } else if (selectedIndex > 0) {
-      newSelectedUsers = newSelectedUsers.concat(
-        selectedUsers.slice(0, selectedIndex),
-        selectedUsers.slice(selectedIndex + 1)
-      );
-    }
 
-    setSelectedUsers(newSelectedUsers);
-  };
 
-  const handlePageChange = (event, page) => {
-    setPage(page);
-  };
 
-  const handleRowsPerPageChange = event => {
-    setRowsPerPage(event.target.value);
-  };
-
-  return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <CardContent className={classes.content}>
-        <PerfectScrollbar>
-          <div className={classes.inner}>
-            <Table>
-              <TableHead>
-                <TableRow>
-                  <TableCell padding="checkbox">
-                    <Checkbox
-                      checked={selectedUsers.length === users.length}
-                      color="primary"
-                      indeterminate={
-                        selectedUsers.length > 0 &&
-                        selectedUsers.length < users.length
-                      }
-                      onChange={handleSelectAll}
-                    />
-                  </TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
-                  <TableCell>Location</TableCell>
-                  <TableCell>Phone</TableCell>
-                  <TableCell>Registration date</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {users.slice(0, rowsPerPage).map(user => (
-                  <TableRow
-                    className={classes.tableRow}
-                    hover
-                    key={user.id}
-                    selected={selectedUsers.indexOf(user.id) !== -1}
-                  >
-                    <TableCell padding="checkbox">
-                      <Checkbox
-                        checked={selectedUsers.indexOf(user.id) !== -1}
-                        color="primary"
-                        onChange={event => handleSelectOne(event, user.id)}
-                        value="true"
-                      />
-                    </TableCell>
-                    <TableCell>
-                      <div className={classes.nameContainer}>
-                        <Avatar
-                          className={classes.avatar}
-                          src={user.avatarUrl}
-                        >
-                          {getInitials(user.name)}
-                        </Avatar>
-                        <Typography variant="body1">{user.name}</Typography>
-                      </div>
-                    </TableCell>
-                    <TableCell>{user.email}</TableCell>
-                    <TableCell>
-                      {user.address.city}, {user.address.state},{' '}
-                      {user.address.country}
-                    </TableCell>
-                    <TableCell>{user.phone}</TableCell>
-                    <TableCell>
-                      {moment(user.createdAt).format('DD/MM/YYYY')}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </div>
-        </PerfectScrollbar>
-      </CardContent>
-      <CardActions className={classes.actions}>
-        <TablePagination
-          component="div"
-          count={users.length}
-          onChangePage={handlePageChange}
-          onChangeRowsPerPage={handleRowsPerPageChange}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          rowsPerPageOptions={[5, 10, 25]}
-        />
-      </CardActions>
-    </Card>
-  );
+Student.propTypes = {
+  //StudentUser: PropTypes.func.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
-UsersTable.propTypes = {
-  className: PropTypes.string,
-  users: PropTypes.array.isRequired
-};
+const mapStateToProps = state => ({
+  errors: state.errors,
+  auth: state.auth
+});
 
-export default UsersTable;
+export default connect(mapStateToProps)(withRouter(Student))
