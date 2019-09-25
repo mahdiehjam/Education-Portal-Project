@@ -5,7 +5,8 @@ import { flexbox } from '@material-ui/system';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import DownloadFile from './Download';
+import DownloadFile from '../../../../Download';
+
 class Teacher extends Component {
   constructor(props) {
     super(props);

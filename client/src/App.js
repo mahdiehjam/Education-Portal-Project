@@ -13,8 +13,8 @@ import newCourse from './_component/admin/newCourse';
 import Admin from './_component/admin/index';
 import Navbar from './_component/navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Teacher from './_component/teacher/teacher';
-import student from './_component/student/student';
+import Teacher from './_component/teacher/Admin';
+import student from './_component/student/Admin';
 
 
 if(localStorage.jwtToken) {

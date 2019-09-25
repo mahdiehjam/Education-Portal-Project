@@ -18,6 +18,7 @@ class RegisterCourse extends Component {
             teacher: '',
             teachers: [],
             courses: [],
+            contacts: [] ,
             errors: {}
         }
         this.result = 0;
@@ -48,8 +49,10 @@ class RegisterCourse extends Component {
         Axios.put('/api/edit'+ id).then(response=>{})
     }
 
-    deleteCourse = () =>{
-
+    deleteCourse = (index) =>{
+        let contacts = [...this.state.contacts];
+        contacts.splice(index, 1);
+        this.setState({contacts});
     }
     componentWillReceiveProps(nextProps) {
         if (nextProps.errors) {
