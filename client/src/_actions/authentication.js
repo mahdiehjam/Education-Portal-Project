@@ -1,11 +1,20 @@
 import axios from 'axios';
-import { GET_ERRORS, SET_CURRENT_USER } from './type';
+import { GET_ERRORS, SET_CURRENT_USER , SET_COURSE } from './type';
 import setAuthToken from '../setAuthToken';
 import jwt_decode from 'jwt-decode';
 
 export const registerUser = (user, history) => dispatch => {
     axios.post('/api/users/register', user)
-            .then(res =>  alert('user successfully added') )
+            .then(res => {
+                 alert('user successfully added');
+                 console.log(res.status);
+                if(res.status === 200){
+                    dispatch(setCourse('Ok'))
+                }else{
+                    dispatch(setCourse('Nok'))
+                } 
+
+        })
             .catch(err => {
                 dispatch({
                     type: GET_ERRORS,
@@ -55,6 +64,13 @@ export const setCurrentUser = decoded => {
     return {
         type: SET_CURRENT_USER,
         payload: decoded
+    }
+}
+
+export const setCourse = response => {
+    return {
+        type: SET_COURSE,
+        payload:  response 
     }
 }
 

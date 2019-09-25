@@ -183,7 +183,7 @@ download(url, options, function(err){
 }) */
 
 
-router.get('/download?file(*)',(req, res) => {
+router.get('/download/:file(*)',(req, res) => {
     var file = req.params.file;
     var fileLocation = path.join('./public/HomeWorks/HomeWorksStudent',file);
     console.log(fileLocation);
