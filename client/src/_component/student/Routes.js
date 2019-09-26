@@ -10,7 +10,6 @@ import {
   UserList as UserListView,
   Typography as TypographyView,
   Icons as IconsView,
-  Account as AccountView,
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
@@ -56,16 +55,22 @@ const Routes = () => {
         path="/icons"
       />
       <RouteWithLayout
-        component={AccountView}
-        exact
-        layout={MainLayout}
-        path="/account"
-      />
-      <RouteWithLayout
         component={SettingsView}
         exact
         layout={MainLayout}
         path="/settings"
+      />
+      <RouteWithLayout
+        component={SignUpView}
+        exact
+        layout={MinimalLayout}
+        path="/sign-up"
+      />
+      <RouteWithLayout
+        component={SignInView}
+        exact
+        layout={MinimalLayout}
+        path="/sign-in"
       />
       <RouteWithLayout
         component={NotFoundView}
