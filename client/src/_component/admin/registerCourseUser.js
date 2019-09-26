@@ -84,18 +84,18 @@ class RegisterCourseUser extends Component {
          return <>
             {!this.result || <table>
                 <tbody>
-                    <tr>
+                    <td>
                         <th>Course name</th>
                         <th>Student name</th>
-                    </tr>
+                    </td>
 
                     {CoursesUser.map(courseuser => {
-                        return <tr key={courseuser.id} id={courseuser.id}>
-                            <td>{courseuser.course}</td>
-                            <td>{courseuser.student}</td>
-                            <td><MDBBtn onClick={this.EditeCourseuser(courseuser.id)} color='info'>Edite</MDBBtn>
-                                <MDBBtn onClick={this.deleteCourseuser} color='danger'>delete</MDBBtn></td>
-                        </tr>
+                        return <td key={courseuser.id} id={courseuser.id}>
+                            <tr>{courseuser.course}</tr>
+                            <tr>{courseuser.student}</tr>
+                            <tr><MDBBtn onClick={this.EditeCourseuser(courseuser.id)} color='info'>Edite</MDBBtn>
+                                <MDBBtn onClick={this.deleteCourseuser} color='danger'>delete</MDBBtn></tr>
+                        </td>
                     })}
                 </tbody>
             </table>}

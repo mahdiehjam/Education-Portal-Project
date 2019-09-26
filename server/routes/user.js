@@ -10,6 +10,7 @@ const validateLoginInput = require('../validation/login');
 const path = require('path');
 const User = require('../model/user');
 
+
 router.get('/', function (req, res, next) {
     
     User.find({}).then(userfind=>{
@@ -146,7 +147,7 @@ router.post('/upload',function(req, res) {
      
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
-        cb(null, 'public/HomeWork/HomeWorksStudent')
+        cb(null, 'public/HomeWorks/HomeWorksStudent')
       },
       filename: function (req, file, cb) {
         cb(null, Date.now() + '-' +file.originalname )
@@ -183,11 +184,43 @@ download(url, options, function(err){
 }) */
 
 
-router.get('/download/:file(*)',(req, res) => {
+router.get('/showimage/:file(*)',(req, res) => {
     var file = req.params.file;
     var fileLocation = path.join('./public/HomeWorks/HomeWorksStudent',file);
     console.log(fileLocation);
     res.download(fileLocation, file); 
+  });
+
+
+// router.post('/download', async(req, resp) => {
+//     //if (req.session.user) {
+//     //    let authorized = /* authorization stuff */
+
+//         if (authorized.rows[0].job_client === req.body.user && req.body.user === req.session.user.username && secret === req.body.user) {
+//             await db.query(`UPDATE milestone_files SET file_download_counter = file_download_counter + 1 WHERE filename = $1 AND file_milestone_id = $2`, [req.body.file, req.body.milestone_id]);
+
+//             let filePath = path.resolve(`./job_files/${authorized.rows[0].job_id}/${authorized.rows[0].milestone_id}/${downloadFile.rows[0].filename}`);
+//             resp.download(filePath, downloadFile.rows[0].filename, (err) => {
+//                 if (err) console.log(err);
+//             });
+//         } else {
+//             resp.send({status: 'error', statusMessage: `You're not authorized`});
+//         }
+//    // } else {
+//    //     resp.send({status: 'error', statusMessage: `You're not logged in`});
+//    // }
+// });
+
+
+router.get('/download', (req, res, next) => {
+    try {
+      const file = `public/HomeWorks/HomeWorksStudent/${req.headers.address}`;
+      console.log(req.headers);
+      res.download(file);
+      
+    } catch (err) {
+      console.log(err);
+    }
   });
 
 module.exports = router;

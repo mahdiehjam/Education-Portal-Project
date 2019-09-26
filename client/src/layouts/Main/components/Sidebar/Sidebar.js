@@ -59,11 +59,6 @@ const Sidebar = props => {
       icon: <ShoppingBasketIcon />
     },
     {
-      title: 'Authentication',
-      href: '/sign-in',
-      icon: <LockOpenIcon />
-    },
-    {
       title: 'Charts',
       href: '/typography',
       icon: <TextFieldsIcon />
@@ -73,11 +68,6 @@ const Sidebar = props => {
       href: '/registerCourseUser',
       icon: <AccountBoxIcon />
     },
-    {
-      title: 'Settings',
-      href: '/settings',
-      icon: <SettingsIcon />
-    }
   ];
 
   return (
@@ -98,7 +88,7 @@ const Sidebar = props => {
           className={classes.nav}
           pages={pages}
         />
-        <UpgradePlan />
+        
       </div>
     </Drawer>
   );
