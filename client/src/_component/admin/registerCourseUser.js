@@ -79,7 +79,7 @@ class RegisterCourseUser extends Component {
         const { CoursesUser } = this.state;
         const { resStatus } = this.props.courseStatus;
         this.result = (resStatus == 'Ok') ? true : false;
-        console.log('resstause: '+ resStatus)
+        console.log('resstatus: '+ resStatus)
         console.log('result: '+this.result);
          return <>
             {!this.result || <table>

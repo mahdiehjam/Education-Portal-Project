@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loginUser } from '../_actions/authentication';
 import classnames from 'classnames';
+import {FormattedMessage} from 'react-intl';
 
 
 class Login extends Component {
@@ -53,7 +54,7 @@ class Login extends Component {
         const {errors} = this.state;
         return(
         <div className="container">
-            <h2>Login</h2>
+            <h2><FormattedMessage id='Login' defaultMessage='Login' /> </h2>
             <form onSubmit={ this.handleSubmit }>
                 <div className="form-group">
                     <input
@@ -83,7 +84,7 @@ class Login extends Component {
                 </div>
                 <div className="form-group">
                     <button type="submit" className="btn btn-primary" >
-                        Login User
+                        <FormattedMessage id='LoginUser' defaultMessage='Login User' /> 
                     </button>
                 </div>
             </form>
