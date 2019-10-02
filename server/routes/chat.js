@@ -8,20 +8,21 @@ const chatkit = new Chatkit.default({
   })
 
 router.post('/', (req, res) => {
-    const { username } = req.body
-    chatkit
+    const { user } = req.body
+     
+     chatkit
      .createUser({
-        id: username, //username.id
-        name: username //username.email
+        id: user.id, 
+        name: user.name 
       })
-      .then(() => res.sendStatus(201))
+      .then(() => res.send(user).sendStatus(201))
       .catch(error => {
         if (error.error === 'services/chatkit/user_already_exists') {
           res.sendStatus(200)
         } else {
           res.status(error.status).json(error)
         }
-      })
+      }) 
   })
   
   router.post('/authenticate', (req, res) => {
