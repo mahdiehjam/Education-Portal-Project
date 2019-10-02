@@ -9,7 +9,7 @@ const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
 const path = require('path');
 const User = require('../model/user');
-
+const HomeWorks = require('../model/HomeWork');
 
 router.get('/', function (req, res, next) {
     
@@ -144,13 +144,20 @@ router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) =
 //uploade file
 
 router.post('/upload',function(req, res) {
-     
+
+
+    console.log(req.headers.filename);
+    const newhomework = new HomeWorks;
+    newhomework.name = req.headers.filename;
+    newhomework.save().then(newHW =>{
+    console.log('newhomework:'+ newhomework)
     var storage = multer.diskStorage({
         destination: function (req, file, cb) {
         cb(null, 'public/HomeWorks/HomeWorksStudent')
       },
       filename: function (req, file, cb) {
-        cb(null, Date.now() + '-' +file.originalname )
+        
+        cb(null, newhomework.id + '-'  + file.originalname )  /*  file.originalname */
       }
   })
   var upload = multer({ storage: storage }).single('file')
@@ -164,25 +171,16 @@ router.post('/upload',function(req, res) {
 
     })
 
+   // res.send(newhomework);
+}).catch(err=>{
+    console.log('home work does not saved bcz ...'+ err)
+})
+ 
+
 });
 
+
 //download file
-
-
-/* var download = require('download-file')
- 
-var url = "http://i.imgur.com/G9bDaPH.jpg"
- 
-var options = {
-    directory: "./public/HomeWorksTeacher",
-    filename: "cat.gif"
-}
- 
-download(url, options, function(err){
-    if (err) throw err
-    console.log("meow")
-}) */
-
 
 router.get('/showimage/:file(*)',(req, res) => {
     var file = req.params.file;
@@ -191,36 +189,33 @@ router.get('/showimage/:file(*)',(req, res) => {
     res.download(fileLocation, file); 
   });
 
+router.get('/showhomeworks',(req,res)=>{
 
-// router.post('/download', async(req, resp) => {
-//     //if (req.session.user) {
-//     //    let authorized = /* authorization stuff */
+    HomeWorks.find({}).then(result=>{
+        res.json(result);
+    })
 
-//         if (authorized.rows[0].job_client === req.body.user && req.body.user === req.session.user.username && secret === req.body.user) {
-//             await db.query(`UPDATE milestone_files SET file_download_counter = file_download_counter + 1 WHERE filename = $1 AND file_milestone_id = $2`, [req.body.file, req.body.milestone_id]);
-
-//             let filePath = path.resolve(`./job_files/${authorized.rows[0].job_id}/${authorized.rows[0].milestone_id}/${downloadFile.rows[0].filename}`);
-//             resp.download(filePath, downloadFile.rows[0].filename, (err) => {
-//                 if (err) console.log(err);
-//             });
-//         } else {
-//             resp.send({status: 'error', statusMessage: `You're not authorized`});
-//         }
-//    // } else {
-//    //     resp.send({status: 'error', statusMessage: `You're not logged in`});
-//    // }
-// });
+})  
 
 
 router.get('/download', (req, res, next) => {
     try {
-      const file = `public/HomeWorks/HomeWorksStudent/${req.headers.address}`;
-      console.log(req.headers);
-      res.download(file);
-      
+
+        const fileAddress = req.headers.address;
+        console.log('fileaddress ' + fileAddress);
+        HomeWorks.findOne({ name: fileAddress }).then(hwfind => {
+
+            const newAddress = hwfind.id +'-'+fileAddress;
+            console.log(newAddress)
+            const file = `public/HomeWorks/HomeWorksStudent/${newAddress}`;
+            console.log(req.headers);
+            res.download(file);
+        })
+
+
     } catch (err) {
-      console.log(err);
+        console.log(err);
     }
-  });
+});
 
 module.exports = router;
