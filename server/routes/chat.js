@@ -9,13 +9,13 @@ const chatkit = new Chatkit.default({
 
 router.post('/', (req, res) => {
     const { user } = req.body
-     
+     console.log(user)
      chatkit
      .createUser({
         id: user.id, 
         name: user.name 
       })
-      .then(() => res.send(user).sendStatus(201))
+      .then(() => res.sendStatus(201))
       .catch(error => {
         if (error.error === 'services/chatkit/user_already_exists') {
           res.sendStatus(200)

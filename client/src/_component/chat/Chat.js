@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import UsernameForm from './components/UsernameForm'
 import ChatScreen from './ChatScreen'
-
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 class Chat extends Component {
   constructor() {
     super()
@@ -24,7 +26,7 @@ class Chat extends Component {
     })
       .then(response => {
         this.setState({
-          currentUsername: user.name,  //this.props.auth
+          currentUsername: user.id,  
           currentScreen: 'ChatScreen'
         })
       })
