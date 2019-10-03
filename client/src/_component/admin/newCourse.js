@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import CheckboxLabels from "./checkbox";
+import {FormattedMessage} from 'react-intl';
 
 
 function NewCourse() {
@@ -17,7 +18,7 @@ function NewCourse() {
     <Typography variant="body2" color="textSecondary" align="center">
       {'NewCourse © '}
       <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+        <FormattedMessage id='YourWebsite' defaultMessage='Your Website'/>
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}
@@ -61,7 +62,7 @@ export default function SignIn() {
           {/* <LockOutlinedIcon /> */}
         {/* </Avatar> */}
         <Typography component="h1" variant="h5">
-          NewCourse
+          <FormattedMessage id='NewCourse' defaultMessage='NewCourse'/>
         </Typography>
         <form className={classes.form} noValidate>
           {/* <TextField
@@ -108,7 +109,7 @@ export default function SignIn() {
             id="teacher assistance name"
             autoComplete="current-teacher assistance name"
           /> */}
-          <div><h3>Course days:</h3></div>
+          <div><h3><FormattedMessage id='CourseDays' defaultMessage='Course days'/>:</h3></div>
            <CheckboxLabels/>
           <Button
             type="submit"
@@ -117,7 +118,7 @@ export default function SignIn() {
             color="primary"
             className={classes.submit}
           >
-            Register
+            <FormattedMessage id='Register' defaultMessage='Register'/>
           </Button>
   
         </form>

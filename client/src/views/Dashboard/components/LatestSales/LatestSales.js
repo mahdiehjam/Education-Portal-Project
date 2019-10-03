@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
-
+import {FormattedMessage} from 'react-intl';
 import { data, options } from './chart';
 
 const useStyles = makeStyles(() => ({
@@ -43,10 +43,10 @@ const LatestSales = props => {
             size="small"
             variant="text"
           >
-            Last 7 days <ArrowDropDownIcon />
+            <FormattedMessage id='Last7days' defaultMessage='Last 7 days'/> <ArrowDropDownIcon />
           </Button>
         }
-        title="Latest Sales"
+        title= {<FormattedMessage id="LatestSales" defaultMessage="Latest Sales"/>}
       />
       <Divider />
       <CardContent>
@@ -64,7 +64,7 @@ const LatestSales = props => {
           size="small"
           variant="text"
         >
-          Overview <ArrowRightIcon />
+          <FormattedMessage id='Overview' defaultMessage='Overview'/> <ArrowRightIcon />
         </Button>
       </CardActions>
     </Card>

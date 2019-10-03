@@ -11,8 +11,8 @@ import ImageIcon from '@material-ui/icons/Image';
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
-
 import { Profile, SidebarNav } from './components';
+import {FormattedMessage} from 'react-intl';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
@@ -44,12 +44,12 @@ const Sidebar = props => {
 
   const pages = [
     {
-      title: 'UploadFile',
+      title: <FormattedMessage id='UploadFile' defaultMessage='UploadFile'/>,
       href: '/student',
       icon: <PeopleIcon />
     },
     {
-      title: 'Products',
+      title: <FormattedMessage id='Products' defaultMessage='Products'/>,
       href: '/products',
       icon: <ShoppingBasketIcon />
     },
