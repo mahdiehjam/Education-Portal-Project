@@ -131,9 +131,9 @@ class RegisterCourse extends Component {
 
                     <div className="form-group">
                         <select name="status" id="status" className="form-control" onChange={this.handleInputChange}>
-                            <option value='notdefine'><FormattedMessage id='chooseStatus' defaultMessage='choose status'/></option>
-                            <option value="I" key='I'><FormattedMessage id='Inprogress' defaultMessage='Inprogress'/></option>
-                            <option value="D" key='D'><FormattedMessage id='Done' defaultMessage='Done'/></option>
+                            <option value='notdefine'>choose status</option>
+                            <option value="I" key='I'>Inprogress</option>
+                            <option value="D" key='D'>Done</option>
                         </select>
                         {errors.email && (<div className="invalid-feedback">{errors.email}</div>)}
                     </div>

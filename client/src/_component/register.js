@@ -54,7 +54,7 @@ class Register extends Component {
         }
     }
 
-      componentDidMount() {
+     /*  componentDidMount() {
         if(this.props.auth.isAuthenticated) {
            // this.props.history.push('/');
         }else{
@@ -63,7 +63,7 @@ class Register extends Component {
            
         }
     } 
-
+ */
     Editeuser = () =>{
 
     }
